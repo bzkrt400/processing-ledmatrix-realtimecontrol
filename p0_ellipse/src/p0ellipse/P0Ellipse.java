@@ -13,16 +13,21 @@ public class P0Ellipse extends PApplet {
 	public void setup() 
 	{
 		size(480, 240);
-
 	}
 
-	public void draw() {
-		if (mousePressed) {
-		    fill(0);
-		  } else {
-		    fill(255);
-		  }
-		  ellipse(mouseX, mouseY, 80, 80);
-
+	public void draw()
+	{
+		if (mousePressed) 
+		{
+			fill(0);
+		}
+		else
+		{
+			fill(255);
+		}
+		
+		ellipse(mouseX, mouseY, 80, 80);
+		
+		rect(mouseX, mouseY, 100, 120);
 	}
 }
