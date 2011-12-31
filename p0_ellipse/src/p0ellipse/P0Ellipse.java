@@ -1,6 +1,6 @@
 package p0ellipse;
 
-import com.sun.xml.internal.ws.util.xml.CDATA;
+//import com.sun.xml.internal.ws.util.xml.CDATA;
 
 import processing.core.PApplet;
 import processing.serial.Serial;
@@ -16,9 +16,12 @@ public class P0Ellipse extends PApplet
 	{
 	  sp = new Serial(this, "COM3", 9600);
 	  sp.write(_cData);
-		size(200, 40);
-		for (int i=0; i<8; i++)
-			rect(10+i*22, 10, 20, 20);	
+		size(548, 174);
+		for(int r=0; r<7; r++)
+		{
+			for (int c=0; c<24; c++)
+				rect(10+c*22, 10+r*22, 20, 20);
+		}
 	}
 
 	public void draw()
