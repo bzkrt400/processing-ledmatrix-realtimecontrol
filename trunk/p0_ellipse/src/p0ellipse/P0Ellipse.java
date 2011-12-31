@@ -2,55 +2,109 @@ package p0ellipse;
 
 //import com.sun.xml.internal.ws.util.xml.CDATA;
 
+
 import processing.core.PApplet;
 import processing.serial.Serial;
 
 public class P0Ellipse extends PApplet
 {	
-	private static final long serialVersionUID = -1596293397312990840L;	
+	private static final long serialVersionUID = -1596293397312990840L;
 	
-	byte _cData = 0x00;
+	byte _pScreen[] = new byte[42];
+	
+	int _DotWidth = 20;
+	int _DotSpan = 2;
+	int _DotDistance = _DotWidth + _DotSpan;
+	
+	int _CountRow = 7;
+	
+	int _BytePerRow = _pScreen.length / _CountRow;
+	int _CountCol = _BytePerRow * 8;
+	
+	int _Margin = 10;
+	
+	int _ColorOn = 0xffff0000;
+	int _ColorOff = 0xffffffff;
+	
 	Serial sp;
+	
+	
 	
 	public void setup() 
 	{
-	  sp = new Serial(this, "COM3", 9600);
-	  sp.write(_cData);
-		size(548, 174);
-		for(int r=0; r<7; r++)
-		{
-			for (int c=0; c<24; c++)
-				rect(10+c*22, 10+r*22, 20, 20);
-		}
+		int iWidth = _DotDistance * _CountCol + _Margin * 2;
+		int iHeight = _DotDistance * _CountRow + _Margin * 2;
+		
+		size(iWidth, iHeight);
+		
+		sp = new Serial(this, "COM3", 115200);  
+	  
+		_pScreen[0] = 0x01;
+		_pScreen[20] = 0x20;
+		
+		DrawMatrix();	
+		
 	}
-
-	public void draw()
-	{		
-		if (mousePressed) 
+	
+	private void DrawMatrix()
+	{
+		for(int i=0; i<_pScreen.length; i++)
 		{
-			if (mouseY > 10 && mouseY < 30 && mouseX > 10)
-			{
-				int x = (mouseX - 10)/22;				
-				
-				if (mouseButton == LEFT)
+			int r=i/_BytePerRow;
+			int c=i%_BytePerRow;
+			
+			for(int j=0;j<8;j++)
+			{			
+				int j1 = 7-j;
+				if((_pScreen[i] & (0x01<<j1)) == (0x01<<j1))
 				{
-					fill(255,0,0);
-					_cData |= 0x01 << (7-x);
+					fill(_ColorOn);
 				}
 				else
 				{
-					fill(255, 255, 255);
-					_cData &= ~(0x01 << (7-x));
+					fill(_ColorOff);
 				}
-				
-				if (x>=0 && x<8)
-				{
-					rect(10+x*22, 10, 20, 20);					
-					sp.write(_cData);
-				}
+				rect(_Margin + 8*c*_DotDistance + j * _DotDistance, _Margin+r*_DotDistance, _DotWidth, _DotWidth);
 			}
+		}		
+	}
+
+	public void draw()
+	{	
+	
+		
+	}
+	
+	public void mousePressed()
+	{
+		int c = (mouseX - _Margin) / _DotDistance;
+		int r = (mouseY - _Margin) / _DotDistance;
+		
+		if (c<0 || c>=_CountCol) return;
+		if (r<0 || r>=_CountRow) return;
+		
+		int i = _BytePerRow*r + c/8;
+		int j=c%8;
+		int j1 = 7-j;
+		
+		if((_pScreen[i] & (0x01<<j1)) == (0x01<<j1))
+		{
+			_pScreen[i] &= ~(0x01<<j1);
 		}
-		//ellipse(mouseX, mouseY, 80, 80);		
+		else
+		{
+			_pScreen[i] |= (0x01<<j1);
+		}
+		
+		DrawMatrix();
+		Send();
+	}
+	
+	private void Send()
+	{
+		sp.write(0xf3);
+		sp.write(_pScreen);
+		
 	}
 
 }
