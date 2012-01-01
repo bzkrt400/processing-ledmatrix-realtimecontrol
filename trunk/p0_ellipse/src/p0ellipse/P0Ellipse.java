@@ -3,6 +3,8 @@ package p0ellipse;
 //import com.sun.xml.internal.ws.util.xml.CDATA;
 
 
+
+
 import processing.core.PApplet;
 import processing.serial.Serial;
 
@@ -28,7 +30,7 @@ public class P0Ellipse extends PApplet
 	
 	Serial sp;
 	
-	
+	DotMatrix dm = new DotMatrix(56, 7); 
 	
 	public void setup() 
 	{
@@ -37,13 +39,15 @@ public class P0Ellipse extends PApplet
 		
 		size(iWidth, iHeight);
 		
-		sp = new Serial(this, "COM3", 115200);  
+		sp = new Serial(this, "COM3", 9600);  
 	  
 		_pScreen[0] = 0x01;
 		_pScreen[20] = 0x20;
 		
 		DrawMatrix();	
-		
+		dm.Clear(true);
+		sp.write(0xf3);
+		sp.write(dm.Output());
 	}
 	
 	private void DrawMatrix()
@@ -103,8 +107,7 @@ public class P0Ellipse extends PApplet
 	private void Send()
 	{
 		sp.write(0xf3);
-		sp.write(_pScreen);
-		
+		sp.write(_pScreen);		
 	}
 
 }
