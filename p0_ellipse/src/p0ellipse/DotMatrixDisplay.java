@@ -2,57 +2,79 @@ package p0ellipse;
 
 import processing.core.PApplet;
 
-public class DotMatrixDisplay extends PApplet
+public class DotMatrixDisplay
 {
-	private int _DotWidth = 20;
-	private int _DotSpan = 2;
-	private int _DotDistance;
+	private PApplet _parent;	
 	
-	private int _Margin = 10;
+	private int _dotWidth = 20;
+	private int _dotSpan = 2;
+	private int _dotDistance;
 	
-	private int _ColorOn = 0xffff0000;
-	private int _ColorOff = 0xffffffff;
+	private int _margin = 10;
 	
-	private int _Width, _Height;
+	private int _colorOn = 0xffff0000;
+	private int _colorOff = 0xffffffff;
 	
-	public int Width()
+	private int _width, _height;
+	
+	public DotMatrix dm;
+	
+	public int getWidth()
 	{
-		return _Width;		
+		return _width;		
 	}
 	
-	public int Height()
+	public int getHeight()
 	{
-		return _Height;
+		return _height;
 	}
 	
-	public DotMatrixDisplay(DotMatrix dm)
+	public int getDotDistance()
 	{
-		_DotDistance  = _DotWidth + _DotSpan;
-		_Width = _DotDistance * dm.ColCount() + _Margin * 2;
-		_Height = _DotDistance * dm.RowCount() + _Margin * 2;
+		return _dotDistance;
 	}
 	
-	public void Update(DotMatrix dm)
+	private void setStyle()
 	{
-		byte[] pScreen = dm.Output();
+		_dotDistance  = _dotWidth + _dotSpan;
+		_width = _dotDistance * dm.getColCount() + _margin * 2;
+		_height = _dotDistance * dm.getRowCount() + _margin * 2;		
+	}
+	
+	public DotMatrixDisplay(PApplet p,int colCount, int rowCount)
+	{
+		dm = new DotMatrix(colCount, rowCount);
+		_parent = p;
+		setStyle();
+	}
+	
+	public DotMatrixDisplay(PApplet p,int colCount, int rowCount, int dotWidth, int margin)
+	{
+		this(p, colCount, rowCount);
+		_dotWidth = dotWidth;
+		_margin = margin;
+		setStyle();
+	}
+	
+	
+	
+	public void display()
+	{		
 		
-		for(int i=0; i< pScreen.length; i++)
-		{
-			int r=i/_BytePerRow;
-			int c=i%_BytePerRow;
-			
-			for(int j=0;j<8;j++)
+		for(int r=0; r< dm.getRowCount(); r++)
+		{	
+			for(int c=0; c<dm.getColCount();c++)
 			{			
-				int j1 = 7-j;
-				if((_pScreen[i] & (0x01<<j1)) == (0x01<<j1))
+				
+				if(dm.getDot(r,c))
 				{
-					fill(_ColorOn);
+					_parent.fill(_colorOn);
 				}
 				else
 				{
-					fill(_ColorOff);
+					_parent.fill(_colorOff);
 				}
-				rect(_Margin + 8*c*_DotDistance + j * _DotDistance, _Margin+r*_DotDistance, _DotWidth, _DotWidth);
+				_parent.rect(_margin + c * _dotDistance, _margin + r * _dotDistance, _dotWidth, _dotWidth);
 			}
 		}
 	}
