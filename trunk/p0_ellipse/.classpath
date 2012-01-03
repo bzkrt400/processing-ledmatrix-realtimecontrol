@@ -40,7 +40,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="p0_ellipse/lib/base/serial"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/base/serial/serial.jar" sourcepath="h:/processing-1.5.1/modes/java/libraries/serial/src">
+	<classpathentry kind="lib" path="lib/base/serial/serial.jar" sourcepath="G:/Processing/processing-1.5.1/modes/java/libraries/serial/src">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="p0_ellipse/lib/base/serial"/>
 		</attributes>

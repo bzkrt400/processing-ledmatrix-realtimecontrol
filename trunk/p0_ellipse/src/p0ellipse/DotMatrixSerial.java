@@ -6,11 +6,9 @@ import processing.serial.Serial;
 public class DotMatrixSerial
 {
 	private Serial _sp;
-
 	
 	public DotMatrixSerial(PApplet p, String PortName)
 	{
-
 		_sp = new Serial(p, PortName, 9600);
 	}
 	
