@@ -19,15 +19,15 @@ public class P0Ellipse extends PApplet
 	{
 	
 		dmd = new DotMatrixDisplay(this, 48, 7, dotWidth, margin);
-		
-		sp = new DotMatrixSerial(this, "COM3");
+		dmd.setColor(0xff0000ff, 0xffffffff);
+		//sp = new DotMatrixSerial(this, "COM1");
 		
 		size(dmd.getWidth(),dmd.getHeight());	  
 		
 		dmd.dm.clear(false);
 		dmd.display();
 		
-		sp.send(dmd.dm.output());	
+		//sp.send(dmd.dm.output());	
 		
 	}
 
@@ -49,7 +49,7 @@ public class P0Ellipse extends PApplet
 		
 		dmd.display();
 	
-		sp.send(dmd.dm.output());
+		//sp.send(dmd.dm.output());
 	}
 	
 	

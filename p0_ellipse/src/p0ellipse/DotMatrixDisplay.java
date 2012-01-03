@@ -56,11 +56,14 @@ public class DotMatrixDisplay
 		setStyle();
 	}
 	
-	
+	public void setColor(int colorOn, int colorOff)
+	{
+		_colorOn = colorOn;
+		_colorOff = colorOff;
+	}	
 	
 	public void display()
-	{		
-		
+	{	
 		for(int r=0; r< dm.getRowCount(); r++)
 		{	
 			for(int c=0; c<dm.getColCount();c++)
@@ -74,6 +77,7 @@ public class DotMatrixDisplay
 				{
 					_parent.fill(_colorOff);
 				}
+				
 				_parent.rect(_margin + c * _dotDistance, _margin + r * _dotDistance, _dotWidth, _dotWidth);
 			}
 		}
