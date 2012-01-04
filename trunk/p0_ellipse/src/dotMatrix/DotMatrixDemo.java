@@ -18,7 +18,7 @@ public class DotMatrixDemo extends PApplet
 	public void setup() 
 	{
 	
-		dmd = new DotMatrixDisplay(this, 48, 7, dotWidth, margin);
+		dmd = new DotMatrixDisplay(this, 48, 8, dotWidth, margin);
 		dmd.setColor(0xffff0000, 0xffffffff);
 		//sp = new DotMatrixSerial(this, "COM1");
 		
@@ -27,8 +27,7 @@ public class DotMatrixDemo extends PApplet
 		dmd.dm.clear(false);
 		dmd.display();
 		
-		//sp.send(dmd.dm.output());	
-		
+		//sp.send(dmd.dm.output());		
 	}
 
 	public void draw()

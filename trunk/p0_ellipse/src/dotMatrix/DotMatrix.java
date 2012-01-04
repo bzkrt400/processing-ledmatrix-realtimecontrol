@@ -7,7 +7,7 @@ public class DotMatrix
 	private int _dotCount;
 	private int _bytesPerRow;
 	
-	private boolean[] _dots;
+	private Dot[] _dots;
 	private byte[] _pScreen;
 	
 	public int getColCount()
@@ -52,16 +52,22 @@ public class DotMatrix
 		_dotCount = _colCount * _rowCount;
 		_bytesPerRow = colCount / 8;
 		
-		_dots = new boolean[_dotCount];
+		_dots = new Dot[_dotCount];
+		
+		for (int i=0; i<_dots.length;i++)
+		{
+			_dots[i] = new Dot(); 			
+		}				
+		//_dots = new boolean[_dotCount];
 		_pScreen = new byte[_dotCount / 8];
 	}
 	
 	public void clear(boolean b)
 	{		
-		for (int i=0; i<_dots.length;i++)
+		for (Dot dot : _dots)
 		{
-			_dots[i] = b;
-		}		
+			dot.set(b);
+		}
 	}
 	
 	private int getIndx(int row, int col)
@@ -71,38 +77,39 @@ public class DotMatrix
 	}
 	
 	public void reverseDot(int row, int col)
-	{
+	{		
 		int i = getIndx(row, col);
-		_dots[i] = !_dots[i];
+		_dots[i].reverse();
 	}
 	
 	public void setDot(int row, int col, boolean b)
 	{
 		int i = getIndx(row, col);
-		_dots[i] = b;
+		_dots[i].set(b);
 	}
 	
 	public void setDot(int index, boolean b)
 	{
-		_dots[index] = b;
+		_dots[index].set(b);
 	}
 	
 	public boolean getDot(int row, int col)
 	{
 		int i = getIndx(row, col);
-		return _dots[i];
+		//return _dots.get(i).isOn();
+		return getDot(i);
 	}
 	
 	public boolean getDot(int index)
 	{
-		return _dots[index];		
+		return _dots[index].isOn();		
 	}
 	
 	public byte[] output()
 	{			
 		for(int i=0; i<_dots.length; i++)
 		{
-			if (_dots[i])
+			if (_dots[i].isOn())
 				_pScreen[i/8] |= bv(7-i%8);
 			else {
 				_pScreen[i/8] &= lv(7-i%8);
