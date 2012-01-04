@@ -10,7 +10,7 @@ public class DotMatrixDemo extends PApplet
 	private static final long serialVersionUID = -1596293397312990840L;
 	
 	private DotMatrixDisplay dmd;	
-	private DotMatrixSerial sp;
+	//private DotMatrixSerial sp;
 
 	private int dotWidth = 20;
 	private int margin = 10;
