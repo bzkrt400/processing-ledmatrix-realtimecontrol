@@ -64,7 +64,7 @@ public class DotMatrixDisplay
 	
 	public void display()
 	{
-		_parent.stroke(255);
+		_parent.stroke(0);
 		for(int r=0; r< dm.getRowCount(); r++)
 		{	
 			for(int c=0; c<dm.getColCount();c++)
@@ -79,7 +79,10 @@ public class DotMatrixDisplay
 					_parent.fill(_colorOff);
 				}
 				
-				_parent.rect(_margin + c * _dotDistance, _margin + r * _dotDistance, _dotWidth, _dotWidth);
+				_parent.pushMatrix();
+				_parent.translate(_margin + c * _dotDistance, _margin + r * _dotDistance);
+				_parent.rect(0, 0 , _dotWidth, _dotWidth);
+				_parent.popMatrix();
 			}
 		}
 	}
