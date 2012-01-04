@@ -2,14 +2,11 @@ package dotMatrix;
 
 public class Dot
 {
-	boolean _on;
-	int _rowID;
-	int _colID;
-	
-	public Dot(int row, int col)
+	private boolean _on;
+
+	public Dot()
 	{
-		_rowID = row;
-		_colID = col;
+
 	}
 	
 	public void turnOn()
@@ -31,5 +28,8 @@ public class Dot
 	{
 		_on = !_on;
 	}
-	
+	public boolean isOn()
+	{
+		return _on;
+	}
 }
