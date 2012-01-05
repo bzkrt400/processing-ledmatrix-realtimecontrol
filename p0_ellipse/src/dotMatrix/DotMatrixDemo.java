@@ -1,5 +1,6 @@
 package dotMatrix;
 
+
 import processing.core.PApplet;
 
 public class DotMatrixDemo extends PApplet
@@ -9,6 +10,7 @@ public class DotMatrixDemo extends PApplet
 	private DotMatrix dm;
 	private DotMatrixDisplay dmd;	
 	private DotMatrixSerial sp;
+	private Spark spark;
 
 	private int dotWidth = 20;
 	private int margin = 10;
@@ -18,13 +20,19 @@ public class DotMatrixDemo extends PApplet
 		this.background(0x33);
 		
 		dm = new DotMatrix(48, 7);
+		
 		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
 		dmd.setColor(0xffff0000, 0xffffffff);
+		
 		sp = new DotMatrixSerial(this, "COM1", dm);
+		spark = new Spark(dm);		
 		
 		size(dmd.getWidth(),dmd.getHeight());	  
 		
 		dm.clear(false);
+		spark.Show();
+		
+		
 		dmd.display();
 		
 		sp.send();		
@@ -32,7 +40,13 @@ public class DotMatrixDemo extends PApplet
 
 	public void draw()
 	{	
-				
+		if (frameCount % 10 != 0) return;
+		
+		dm.clear(false);
+		spark.moveTo((int)random(dm.getColCount()), (int)random(dm.getRowCount()));
+		spark.Show();
+		
+		dmd.display();
 	}
 	
 	public void mousePressed()
@@ -44,8 +58,7 @@ public class DotMatrixDemo extends PApplet
 			
 			if (r < 0 || c <0 || r >= dm.getRowCount() || c >= dm.getColCount()) return;			
 			
-			dm.reverseDot(r, c);
-		
+			dm.reverseDot(r, c);		
 		}
 		
 		dmd.display();		
