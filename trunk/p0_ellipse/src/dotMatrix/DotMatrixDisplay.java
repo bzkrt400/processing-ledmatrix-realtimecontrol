@@ -17,17 +17,7 @@ public class DotMatrixDisplay
 	
 	private int _width, _height;
 	
-	private DotMatrix _dm;
-	
-	public int getWidth()
-	{
-		return _width;		
-	}
-	
-	public int getHeight()
-	{
-		return _height;
-	}
+	private DotMatrix _dm;	
 	
 	public int getDotDistance()
 	{
@@ -39,6 +29,9 @@ public class DotMatrixDisplay
 		_dotDistance  = _dotWidth + _dotSpan;
 		_width = _dotDistance * _dm.getColCount() + _margin * 2;
 		_height = _dotDistance * _dm.getRowCount() + _margin * 2;		
+		
+		_parent.size(_width, _height);
+		_parent.background(0x33);
 	}
 	
 	public DotMatrixDisplay(PApplet p,DotMatrix dm)

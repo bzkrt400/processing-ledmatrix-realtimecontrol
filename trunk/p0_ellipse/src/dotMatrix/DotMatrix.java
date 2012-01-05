@@ -85,7 +85,7 @@ public class DotMatrix
 	public void setDot(int row, int col, boolean b)
 	{
 		int i = getIndx(row, col);
-		_dots[i].set(b);
+		this.setDot(i, b);
 	}
 	
 	public void setDot(int index, boolean b)
