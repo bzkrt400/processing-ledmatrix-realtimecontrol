@@ -1,7 +1,5 @@
 package dotMatrix;
 
-
-
 public class DotMatrix
 {
 	private int _colCount;
@@ -119,23 +117,7 @@ public class DotMatrix
 			{
 				_pScreen[i/8] &= lv(7-i%8);
 			}
-		}
-		
+		}		
 		return _pScreen;
 	}
-	
-	public void moveOnCol(boolean direction, boolean recycle)
-	{
-		
-		for (int r=0; r<_rowCount; r++)
-		{
-			boolean temp = recycle? getDot(r, 0):false;
-			for (int c=0; c<_colCount-1; c++)
-			{
-				setDot(r, c, getDot(r, c+1));
-			}
-			setDot(r, _colCount-1, temp);
-		}
-	}
-	
 }

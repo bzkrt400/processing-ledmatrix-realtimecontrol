@@ -17,7 +17,7 @@ public class DotMatrixDisplay
 	
 	private int _width, _height;
 	
-	public DotMatrix dm;
+	private DotMatrix _dm;
 	
 	public int getWidth()
 	{
@@ -37,20 +37,20 @@ public class DotMatrixDisplay
 	private void setStyle()
 	{
 		_dotDistance  = _dotWidth + _dotSpan;
-		_width = _dotDistance * dm.getColCount() + _margin * 2;
-		_height = _dotDistance * dm.getRowCount() + _margin * 2;		
+		_width = _dotDistance * _dm.getColCount() + _margin * 2;
+		_height = _dotDistance * _dm.getRowCount() + _margin * 2;		
 	}
 	
-	public DotMatrixDisplay(PApplet p,int colCount, int rowCount)
+	public DotMatrixDisplay(PApplet p,DotMatrix dm)
 	{
-		dm = new DotMatrix(colCount, rowCount);
+		_dm = dm;
 		_parent = p;
 		setStyle();
 	}
 	
-	public DotMatrixDisplay(PApplet p,int colCount, int rowCount, int dotWidth, int margin)
+	public DotMatrixDisplay(PApplet p, DotMatrix dm, int dotWidth, int margin)
 	{
-		this(p, colCount, rowCount);
+		this(p, dm);
 		_dotWidth = dotWidth;
 		_margin = margin;
 		setStyle();
@@ -65,12 +65,12 @@ public class DotMatrixDisplay
 	public void display()
 	{
 		_parent.stroke(0);
-		for(int r=0; r< dm.getRowCount(); r++)
+		for(int r=0; r< _dm.getRowCount(); r++)
 		{	
-			for(int c=0; c<dm.getColCount();c++)
+			for(int c=0; c<_dm.getColCount();c++)
 			{			
 				
-				if(dm.getDot(r,c))
+				if(_dm.getDot(r,c))
 				{
 					_parent.fill(_colorOn);
 				}
