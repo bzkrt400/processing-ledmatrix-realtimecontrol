@@ -1,5 +1,6 @@
 package dotMatrix;
 
+
 import processing.core.PVector;
 
 public class Spark extends Dot
@@ -18,6 +19,16 @@ public class Spark extends Dot
 	{
 		_pv.x = (float)col;
 		_pv.y = (float)row;	
+	}
+	
+	public int getCol()
+	{
+		return (int)_pv.x;
+	}
+	
+	public int getRow()
+	{
+		return (int)_pv.y;
 	}
 	
 	public void Show()
