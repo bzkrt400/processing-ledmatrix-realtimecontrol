@@ -6,6 +6,7 @@ public class DotMatrixDemo extends PApplet
 {	
 	private static final long serialVersionUID = -1596293397312990840L;
 	
+	private DotMatrix dm;
 	private DotMatrixDisplay dmd;	
 	private DotMatrixSerial sp;
 
@@ -15,54 +16,40 @@ public class DotMatrixDemo extends PApplet
 	public void setup() 
 	{
 		this.background(0x33);
-		dmd = new DotMatrixDisplay(this, 48, 7, dotWidth, margin);
+		
+		dm = new DotMatrix(48, 7);
+		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
 		dmd.setColor(0xffff0000, 0xffffffff);
-		sp = new DotMatrixSerial(this, "COM3");
+		sp = new DotMatrixSerial(this, "COM1", dm);
 		
 		size(dmd.getWidth(),dmd.getHeight());	  
 		
-		dmd.dm.clear(false);
+		dm.clear(false);
 		dmd.display();
 		
-		sp.send(dmd.dm.output());		
+		sp.send();		
 	}
 
 	public void draw()
 	{	
-		
-		if (frameCount % 8 == 0)
-		{
-			dmd.dm.moveOnCol(true, false);
-			
-			int seed = (int)random(dmd.dm.getRowCount()*2);
-			if (seed < dmd.dm.getRowCount())
-				dmd.dm.reverseDot(seed, dmd.dm.getColCount()-1);		
-			dmd.display();
-		
-			sp.send(dmd.dm.output());			
-		}
+				
 	}
 	
 	public void mousePressed()
 	{	
 		if(mouseButton == LEFT)
 		{
-		
 			int c = (mouseX - margin) / dmd.getDotDistance();
 			int r = (mouseY - margin) / dmd.getDotDistance();		
 			
-			if (r < 0 || c <0 || r >= dmd.dm.getRowCount() || c >= dmd.dm.getColCount()) return;			
+			if (r < 0 || c <0 || r >= dm.getRowCount() || c >= dm.getColCount()) return;			
 			
-			dmd.dm.reverseDot(r, c);
+			dm.reverseDot(r, c);
 		
 		}
-		else if(mouseButton == RIGHT)
-		{
-			dmd.dm.moveOnCol(true, true);
-		}
-		dmd.display();
 		
-		sp.send(dmd.dm.output());
+		dmd.display();		
+		sp.send();
 	}	
 
 }
