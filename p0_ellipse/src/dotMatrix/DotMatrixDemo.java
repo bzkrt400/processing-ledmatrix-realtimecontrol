@@ -25,9 +25,7 @@ public class DotMatrixDemo extends PApplet
 		dmd.setColor(0xffff0000, 0xffffffff);
 		
 		sp = new DotMatrixSerial(this, "COM1", dm);
-		spark = new Spark(dm);		
-		
-		size(dmd.getWidth(),dmd.getHeight());	  
+		spark = new Spark(dm);
 		
 		dm.clear(false);
 		spark.Show();
