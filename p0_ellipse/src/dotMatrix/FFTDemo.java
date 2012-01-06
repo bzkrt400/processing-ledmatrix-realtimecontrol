@@ -11,13 +11,24 @@ public class FFTDemo extends PApplet
 	Minim minim;
 	AudioPlayer ap;
 	FFT fft;
+	int r =0;
+	
+	int halfWidth, halfHeight;
+	float sectionWidth;
 	
 	public void setup()
 	{
-		size(512, 200, P2D);	
-		minim = new Minim(this);		
+		size(600, 600, P2D);	
+		
+		halfWidth = width / 2;
+		halfHeight = height / 2;
+		
+		minim = new Minim(this);	
+		background(0xcc);
   
 		ap = minim.loadFile("sample.mp3", 2048);
+		
+		sectionWidth = width / 256;
 
 		ap.loop();
 		
@@ -31,9 +42,11 @@ public class FFTDemo extends PApplet
 	
 	public void draw()
 	{
-		/*
-		 background(0);
-		  fill(255);
+		r++;
+		fade();
+		 //background(0);
+		  //fill(255);
+		  /*
 		  fft.forward(ap.mix);
 		  int w = (int)(width/fft.avgSize());
 		  for(int i = 0; i < fft.avgSize(); i++)
@@ -44,19 +57,36 @@ public class FFTDemo extends PApplet
 		  */
 		  //background(0);
 			
-		  stroke(255);
+		  stroke(0xff0000ff);
 		  // we draw the waveform by connecting neighbor values with a line
 		  // we multiply each of the values by 50 
 		  // because the values in the buffers are normalized
 		  // this means that they have values between -1 and 1. 
 		  // If we don't scale them up our waveform 
 		  // will look more or less like a straight line.
+		  
+		  pushMatrix();
+			
+			translate(halfWidth, halfHeight);
+			rotate(radians(r));
+			scale(1.1f);
+
+		    
+		  
 		  for(int i = 0; i < ap.bufferSize() - 1; i++)
 		  {
-		    line(i, 50 + ap.left.get(i)*50, i+1, 50 + ap.left.get(i+1)*50);
-		    line(i, 150 + ap.right.get(i)*50, i+1, 150 + ap.right.get(i+1)*50);
+		    line((-ap.bufferSize() / 2 + i)*sectionWidth, -100 + ap.left.get(i)*250, (-ap.bufferSize() / 2 + i+1)*sectionWidth, -100 + ap.left.get(i+1)*250);
+		    line((-ap.bufferSize() / 2 + i)*sectionWidth, +100 + ap.left.get(i)*250, (-ap.bufferSize() / 2 + i+1)*sectionWidth, +100 + ap.left.get(i+1)*250);
 		  }
+		  popMatrix();
 	}
+	
+	private void fade()
+	{
+		fill(0xff, 10);
+		this.rect(0, 0, width, height);
+	}
+	
 	public void stop()
 	{
 	  // always close Minim audio classes when you finish with them
