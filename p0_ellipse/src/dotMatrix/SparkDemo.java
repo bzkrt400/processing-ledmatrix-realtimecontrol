@@ -32,7 +32,7 @@ public class SparkDemo extends PApplet
 		{
 			spark = new Spark(dm);
 			spark.moveTo(i,dm.getRowCount()-1);
-			spark.Show();
+			spark.show();
 			alSparks.add(spark);
 		}
 		
@@ -60,7 +60,7 @@ public class SparkDemo extends PApplet
 			for (int i=spark.getRow(); i< dm.getRowCount(); i++)
 				dm.setDot(i, spark.getCol(), true);
 			
-			spark.Show();					
+			spark.show();					
 		}
 
 		dmd.display();
