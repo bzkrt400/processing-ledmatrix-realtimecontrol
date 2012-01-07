@@ -69,7 +69,7 @@ public class FFTDemo extends PApplet
 			
 			translate(halfWidth, halfHeight);
 			rotate(radians(r));
-			scale(1.1f);
+			scale(0.125f);
 
 		    
 		  
