@@ -44,7 +44,7 @@ public class BuffDemo extends PApplet
 		strokeWeight(2);  
 		 
 		drawWave(ap.left, r);  
-		drawWave(ap.right, r+PI/2);	
+		drawWave(ap.right, r+HALF_PI);	
 		
   		delay(50);
 	}
