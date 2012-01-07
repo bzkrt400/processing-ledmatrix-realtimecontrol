@@ -1,49 +1,51 @@
 package dotMatrix;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 
-public class FFTDemo extends PApplet
+public class BuffDemo extends PApplet
 {
 	private static final long serialVersionUID = 8598839469711789068L;
 	Minim minim;
 	AudioPlayer ap;
 	FFT fft;
-	int r =0;
+	float r =0f;
+	PFont font;
 	
 	int halfWidth, halfHeight;
 	float sectionWidth;
 	
 	public void setup()
 	{
+		font = this.loadFont("Calibri-24.vlw");
 		size(600, 600, P2D);	
 		
 		halfWidth = width / 2;
-		halfHeight = height / 2;
+		halfHeight = height/ 2;
 		
 		minim = new Minim(this);	
-		background(0xcc);
+		background(0x00);
   
-		ap = minim.loadFile("sample.mp3", 2048);
+		ap = minim.loadFile("sample.mp3", 512);
 		
-		sectionWidth = width / 256;
+		sectionWidth = (float)width / ap.bufferSize();
 
 		ap.loop();
 		
-		fft = new FFT(ap.bufferSize(), ap.sampleRate());
-		// use 128 averages.
-		// the maximum number of averages we could ask for is half the spectrum size. 
-		fft.logAverages(22,3);
+
 		
-		rectMode(CORNERS);
+		  textFont(font);
+		  fill(0);
+		  text(ap.bufferSize(), 0, 24);
 	}
 	
 	public void draw()
 	{
-		r++;
-		fade();
+		r+=0.02;
+		fade(20);
 		 //background(0);
 		  //fill(255);
 		  /*
@@ -57,7 +59,8 @@ public class FFTDemo extends PApplet
 		  */
 		  //background(0);
 			
-		  stroke(0xff0000ff);
+		  stroke(0xffffffff);
+		  strokeWeight(2);  
 		  // we draw the waveform by connecting neighbor values with a line
 		  // we multiply each of the values by 50 
 		  // because the values in the buffers are normalized
@@ -67,23 +70,36 @@ public class FFTDemo extends PApplet
 		  
 		  pushMatrix();
 			
-			translate(halfWidth, halfHeight);
-			rotate(radians(r));
-			scale(0.125f);
-
-		    
+		translate(halfWidth, halfHeight);
+			rotate(r);
+			scale(1.4f);
+					    
 		  
-		  for(int i = 0; i < ap.bufferSize() - 1; i++)
+		  for(int i = 1; i < ap.bufferSize(); i++)
 		  {
-		    line((-ap.bufferSize() / 2 + i)*sectionWidth, -100 + ap.left.get(i)*250, (-ap.bufferSize() / 2 + i+1)*sectionWidth, -100 + ap.left.get(i+1)*250);
-		    line((-ap.bufferSize() / 2 + i)*sectionWidth, +100 + ap.left.get(i)*250, (-ap.bufferSize() / 2 + i+1)*sectionWidth, +100 + ap.left.get(i+1)*250);
+		    line((i-1)*sectionWidth - halfWidth, ap.left.get(i-1)*250, i*sectionWidth - halfWidth, ap.left.get(i)*250);
+		    		    
 		  }
 		  popMatrix();
+  
+		  pushMatrix();
+			
+			translate(halfWidth, halfHeight);
+				rotate(r+PI/2);
+				scale(1.4f);		    
+			  
+			  for(int i = 1; i < ap.bufferSize(); i++)
+			  {
+			   
+			    line((i-1)*sectionWidth - halfWidth,ap.left.get(i-1)*250, i*sectionWidth - halfWidth, ap.left.get(i)*250);		    
+			  }
+			  popMatrix();
+  		delay(50);
 	}
 	
-	private void fade()
+	private void fade(int fadeValue)
 	{
-		fill(0xff, 10);
+		fill(0x00, fadeValue);
 		this.rect(0, 0, width, height);
 	}
 	
