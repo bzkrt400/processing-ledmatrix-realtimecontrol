@@ -39,7 +39,7 @@ public class FlashDemo extends PApplet
 		for (Spark spark : alSparks)
 		{
 			spark.moveTo((int)random(dm.getColCount()), (int)random(dm.getRowCount()));
-			spark.Show();					
+			spark.show();					
 		}
 
 		dmd.display();
