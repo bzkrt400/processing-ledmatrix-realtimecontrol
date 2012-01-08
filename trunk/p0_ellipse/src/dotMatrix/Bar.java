@@ -2,6 +2,7 @@ package dotMatrix;
 
 import java.util.ArrayList;
 
+
 public class Bar
 {
 	private ArrayList<Spark> _sparks;
@@ -21,7 +22,7 @@ public class Bar
 		for (int i=0; i<height; i++)
 		{
 			Spark spark = new Spark(_dm);
-			spark.moveTo(_col, i);
+			spark.moveTo(_col, _dm.getRowCount()-1-i);
 			_sparks.add(spark);
 		}				
 	}
