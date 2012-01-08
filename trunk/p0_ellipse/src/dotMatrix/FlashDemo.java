@@ -28,10 +28,13 @@ public class FlashDemo extends PApplet
 		for(int i=0; i<6; i++)
 			alSparks.add(new Spark(dm));		  
 		
+		dmd.display();
+		sp.send();
 	}
 
 	public void draw()
 	{	
+		/*
 		//if (frameCount % 10 != 0) return;
 		
 		dm.clear(false);
@@ -44,6 +47,7 @@ public class FlashDemo extends PApplet
 
 		dmd.display();
 		sp.send();
+		*/
 	}
 	
 	public void mousePressed()
