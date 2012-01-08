@@ -17,12 +17,11 @@ public class FFTDemo extends PApplet
 	
 	public void setup()
 	{
-		minim = new Minim(this);	
-		background(0x00);
-  
+		minim = new Minim(this);  
 		ap = minim.loadFile("sample.mp3", 512);
 		ap.loop();	
 		
+		background(0x00);
 		size(600, 100);
 		
 		fft = new FFT(ap.bufferSize(), ap.sampleRate());
@@ -43,10 +42,18 @@ public class FFTDemo extends PApplet
 		int w = (int)(width/fft.avgSize());
 		for(int i = 0; i < fft.avgSize(); i++)
 		{
-			float f =  constrain((int)(2* log(fft.getAvg(i))), 0, 7) *10;
+			float f =  constrain((int)(2.5* log(fft.getAvg(i))), 0, 7) *10;
 			if (fftMax < f) fftMax =  f;			
 		    rect(i*w, height, i*w + w, height -f);
 	    }
 		
+	}
+	
+	public void stop()
+	{
+	  // always close Minim audio classes when you finish with them
+		ap.close();
+		minim.stop();
+		super.stop();
 	}
 }
