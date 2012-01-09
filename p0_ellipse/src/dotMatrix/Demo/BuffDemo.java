@@ -1,7 +1,8 @@
-package dotMatrix;
+package dotMatrix.Demo;
 
 import processing.core.PApplet;
 import ddf.minim.*;
+import dotMatrix.TestHelper;
 
 public class BuffDemo extends PApplet
 {
