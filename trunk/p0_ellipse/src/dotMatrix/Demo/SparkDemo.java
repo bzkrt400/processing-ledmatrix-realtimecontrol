@@ -1,6 +1,11 @@
-package dotMatrix;
+package dotMatrix.Demo;
 
 import java.util.ArrayList;
+
+import dotMatrix.DotMatrix;
+import dotMatrix.DotMatrixDisplay;
+import dotMatrix.DotMatrixSerial;
+import dotMatrix.Spark;
 
 import processing.core.PApplet;
 

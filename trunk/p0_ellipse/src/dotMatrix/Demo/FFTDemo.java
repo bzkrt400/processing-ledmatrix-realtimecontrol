@@ -1,8 +1,9 @@
-package dotMatrix;
+package dotMatrix.Demo;
 
 import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.analysis.*;
+import dotMatrix.TestHelper;
 import processing.core.PApplet;
 
 public class FFTDemo extends PApplet
