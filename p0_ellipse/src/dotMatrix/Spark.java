@@ -30,8 +30,7 @@ public class Spark extends Dot
 	{
 		return (int)_pv.y;
 	}
-	
-	
+		
 	public void show()
 	{
 		int col = (int) _pv.x;
