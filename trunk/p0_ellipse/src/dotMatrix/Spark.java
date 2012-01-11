@@ -1,6 +1,5 @@
 package dotMatrix;
 
-
 import processing.core.PVector;
 
 public class Spark extends Dot
@@ -33,15 +32,15 @@ public class Spark extends Dot
 		
 	public void show()
 	{
-		int col = (int) _pv.x;
-		int row = (int) _pv.y;
+	
+		if (getRow() <0 || getRow() >= _dm.getRowCount())return;
+		if (getCol() <0 || getCol() >= _dm.getColCount())return;
 		
-		if (row <0 || row >= _dm.getRowCount())return;
-		if (col <0 || col >= _dm.getColCount())return;
-		
-		_dm.setDot(row, col, this.isOn());		
-	}	
+		_dm.setDot(getRow(), getCol(), this.isOn());		
+	}
 	
-	
-	
+	public int getID()
+	{
+		return (getRow() * _dm.getColCount() + getCol());
+	}
 }

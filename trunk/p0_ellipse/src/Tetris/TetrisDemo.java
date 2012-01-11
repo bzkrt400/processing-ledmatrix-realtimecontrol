@@ -1,4 +1,4 @@
-package Tetris;
+	package Tetris;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDisplay;
@@ -8,15 +8,19 @@ public class TetrisDemo extends PApplet
 {
 	private static final long serialVersionUID = 4522547351037250574L;
 	
-	private DotMatrix dm;
-	private TetrisBlock tb;
+	private DotMatrix dm;	
 	private DotMatrixDisplay dmd;
+	
+	private TetrisBlock tb;
+	private TetrisStack ts;
 	
 	public void setup()
 	{
-		dm = new DotMatrix(48,7);
+		dm = new DotMatrix(48,7);		
+		dmd = new DotMatrixDisplay(this, dm);
+		
 		tb = new TetrisBlock(dm);
-		dmd = new DotMatrixDisplay(this, dm);	
+		ts = new TetrisStack(dm);
 		
 		tb.setIndex(1);
 		tb.show();
@@ -56,16 +60,31 @@ public class TetrisDemo extends PApplet
 		}
 		
 		if (t != null)
-			tb.change(t);
+			tb.change(t,ts);
 		
-		dm.clear(false);
-		//tb.turn();
-		tb.show();
-		dmd.display();
+		this.display();
 	}
 	
 	public void draw()
-	{
+	{	
 		
+		boolean b = tb.change(TetrisDirection.RIGHT, ts);
+		delay(200);
+		
+		if (b)
+		{			
+			ts.merge(tb);
+			tb = new TetrisBlock(dm);
+		}			
+		
+		this.display();		
+	}
+	
+	private void display()
+	{
+		dm.clear(false);
+		tb.show();
+		ts.show();
+		dmd.display();
 	}
 }
