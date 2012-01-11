@@ -11,10 +11,56 @@ import dotMatrix.Spark;
 
 public class TetrisBlock
 {
-	static int _pattern[][][] =
+	private final static int _patternAll[][][][] =
 	{
-		{{0,1},{1,1},{2,1},{3,1}},
-		{{1,0},{1,1},{1,2},{1,3}},
+		// l
+		{
+			{{0,1},{1,1},{2,1},{3,1}},
+			{{1,0},{1,1},{1,2},{1,3}},
+		},
+		
+		// O
+		{
+			{{0,0}, {1,0}, {1,1}, {0,1}},
+			{{0,0}, {1,0}, {1,1}, {0,1}},
+		},
+		
+		// T
+		{
+			{{0,1}, {1,1}, {2,1}, {1,0}},
+			{{1,0}, {1,1}, {1,2}, {2,1}},
+			{{0,1}, {1,1}, {2,1}, {1,2}},
+			{{1,0}, {1,1}, {1,2}, {0,1}},
+		},
+		
+		// J
+		{
+			{{0,1}, {1,1}, {2,1}, {2,2}},
+			{{1,0}, {1,1}, {1,2}, {0,2}},
+			{{0,1}, {1,1}, {2,1}, {0,0}},
+			{{1,0}, {1,1}, {1,2}, {2,0}},
+		},
+		
+		// L
+		{
+			{{0,1}, {1,1}, {2,1}, {2,0}},
+			{{1,0}, {1,1}, {1,2}, {2,2}},
+			{{0,1}, {1,1}, {2,1}, {0,2}},
+			{{1,0}, {1,1}, {1,2}, {0,0}},
+		},
+		
+		// Z
+		{
+			{{0,0}, {0,1}, {1,1}, {1,2}},
+			{{0,2}, {1,2}, {1,1}, {2,1}},
+		},
+		
+		// S
+		{
+			{{0,2}, {1,2}, {1,1}, {2,1}},
+			{{0,0}, {0,1}, {1,1}, {1,2}},
+		},
+		
 	};
 	
 	private DotMatrix _dm;	
@@ -22,11 +68,14 @@ public class TetrisBlock
 	private PVector _location;
 	private ArrayList<Spark> _sparks;
 	
-	public TetrisBlock(DotMatrix dm)
+	private int[][][] _pattern;
+	
+	public TetrisBlock(DotMatrix dm, int pattern)
 	{
 		_dm = dm;
 		_sparks = new ArrayList<Spark>();
 		_location = new PVector(0,0);
+		 _pattern = _patternAll[pattern];
 		setSparks();
 	}
 	
@@ -52,6 +101,11 @@ public class TetrisBlock
 		{
 			spark.show();
 		}
+	}
+	
+	public static int getPatternCount()
+	{
+		return _patternAll.length;
 	}
 
 	public boolean change(TetrisDirection direction, TetrisStack ts)

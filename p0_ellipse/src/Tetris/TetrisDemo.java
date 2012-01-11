@@ -2,6 +2,7 @@
 
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDisplay;
+import dotMatrix.DotMatrixSerial;
 import processing.core.PApplet;
 
 public class TetrisDemo extends PApplet
@@ -11,6 +12,8 @@ public class TetrisDemo extends PApplet
 	private DotMatrix dm;	
 	private DotMatrixDisplay dmd;
 	
+	private DotMatrixSerial sp;
+	
 	private TetrisBlock tb;
 	private TetrisStack ts;
 	
@@ -19,9 +22,11 @@ public class TetrisDemo extends PApplet
 		dm = new DotMatrix(48,7);		
 		dmd = new DotMatrixDisplay(this, dm);
 		
-		tb = new TetrisBlock(dm);
-		ts = new TetrisStack(dm);
+		sp = new DotMatrixSerial(this, "COM3", dm);
 		
+		tb = new TetrisBlock(dm, (int)random(TetrisBlock.getPatternCount()));
+		ts = new TetrisStack(dm);
+				
 		tb.setIndex(1);
 		tb.show();
 		dmd.display();
@@ -66,15 +71,14 @@ public class TetrisDemo extends PApplet
 	}
 	
 	public void draw()
-	{	
-		
+	{			
 		boolean b = tb.change(TetrisDirection.RIGHT, ts);
 		delay(200);
 		
 		if (b)
 		{			
 			ts.merge(tb);
-			tb = new TetrisBlock(dm);
+			tb = new TetrisBlock(dm, (int)random(TetrisBlock.getPatternCount()));
 		}			
 		
 		this.display();		
@@ -85,6 +89,7 @@ public class TetrisDemo extends PApplet
 		dm.clear(false);
 		tb.show();
 		ts.show();
+		sp.send();
 		dmd.display();
 	}
 }
