@@ -30,6 +30,11 @@ public class TetrisBlock
 		setSparks();
 	}
 	
+	public ArrayList<Spark> getSparks()
+	{
+		return _sparks;
+	}
+	
 	public int countIndex()
 	{
 		return _pattern.length;
@@ -41,6 +46,27 @@ public class TetrisBlock
 		setSparks();
 	}
 	
+	public void show()
+	{
+		for (Spark spark : _sparks)
+		{
+			spark.show();
+		}
+	}
+
+	public boolean change(TetrisDirection direction, TetrisStack ts)
+	{	
+		tryChange(direction);
+		
+		boolean b = isOutOfBorder() || isContacted(ts);
+		if (b)
+		{
+			tryChange(TetrisDirection.reverse(direction));			
+		}
+		
+		return b;
+	}
+
 	private void setSparks()
 	{
 		_sparks.clear();
@@ -51,14 +77,6 @@ public class TetrisBlock
 			spark.moveTo(locationCol() + _pattern[_index][i][0], locationRow() + _pattern[_index][i][1]);
 			_sparks.add(spark);
 		}		
-	}
-	
-	public void show()
-	{
-		for (Spark spark : _sparks)
-		{
-			spark.show();
-		}
 	}
 	
 	private void tryChange(TetrisDirection t)
@@ -91,22 +109,32 @@ public class TetrisBlock
 		
 		setSparks();
 	}
-
-	public void change(TetrisDirection direction)
-	{				
-		tryChange(direction);
-		
-		if (isOutOfBorder())
-			tryChange(TetrisDirection.reverse(direction));		
-	}
 	
-	private boolean isOutOfBorder()
+	public boolean isContacted(TetrisStack ts)
+	{	
+		boolean b = false;
+		
+		for (Spark sparkStack : ts.getSparks())
+		{
+			for (Spark spark : _sparks)
+			{
+				if (sparkStack.getID() == spark.getID())
+				{
+					b = true;
+					break;
+				}	
+			}			
+		}
+		return b;
+	}
+
+	public boolean isOutOfBorder()
 	{
 		boolean b = false;
 		
 		for (Spark spark : _sparks)
 		{
-			if (spark.getCol() <0 || spark.getCol() >= _dm.getColCount() ||
+			if (	spark.getCol() <0 || spark.getCol() >= _dm.getColCount() ||
 					spark.getRow() <0 || spark.getRow() >= _dm.getRowCount()) 
 			{
 				b = true;
@@ -126,4 +154,6 @@ public class TetrisBlock
 	{
 		return (int)_location.y;
 	}
+	
+	
 }
