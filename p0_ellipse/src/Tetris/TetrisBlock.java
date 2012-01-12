@@ -61,18 +61,25 @@ public class TetrisBlock
 	};
 	
 	private DotMatrix _dm;	
-	private int _index = 0;
+	private int _index;
 	private PVector _location;
 	private ArrayList<Spark> _sparks;
 	
 	private int[][][] _pattern;
 	
-	public TetrisBlock(DotMatrix dm, int pattern)
+	public TetrisBlock(DotMatrix dm, int pattern, int index)
 	{
 		_dm = dm;
 		_sparks = new ArrayList<Spark>();
-		_location = new PVector(0,0);
+		_location = new PVector(2,2);
 		_pattern = _patternAll[pattern];
+		_index = index % _pattern.length;		
+		setSparks();
+	}
+	
+	public void moveTo(int col, int row)
+	{
+		_location = new PVector(col, row);
 		setSparks();
 	}
 	
@@ -86,11 +93,7 @@ public class TetrisBlock
 		return _pattern.length;
 	}
 	
-	public void setIndex(int index)
-	{
-		_index = index;		
-		setSparks();
-	}
+	
 	
 	public void show()
 	{
@@ -105,31 +108,6 @@ public class TetrisBlock
 		return _patternAll.length;
 	}
 
-	public boolean change(TetrisDirection direction, TetrisStack ts)
-	{	
-		tryChange(direction);
-		
-		boolean b = isOutOfBorder() || isContacted(ts);
-		if (b)
-		{
-			tryChange(TetrisDirection.reverse(direction));			
-		}
-		
-		return b;
-	}
-
-	private void setSparks()
-	{
-		_sparks.clear();
-		
-		for(int i=0; i<_pattern[_index].length; i++)
-		{
-			Spark spark = new Spark(_dm);
-			spark.moveTo(locationCol() + _pattern[_index][i][0], locationRow() + _pattern[_index][i][1]);
-			_sparks.add(spark);
-		}		
-	}
-	
 	private void tryChange(TetrisDirection t)
 	{
 		switch (t)
@@ -160,7 +138,20 @@ public class TetrisBlock
 		
 		setSparks();
 	}
-	
+
+	public boolean change(TetrisDirection direction, TetrisStack ts)
+	{	
+		tryChange(direction);
+		
+		boolean b = isOutOfBorder() || isContacted(ts);
+		if (b)
+		{
+			tryChange(TetrisDirection.reverse(direction));			
+		}
+		
+		return b;
+	}
+
 	public boolean isContacted(TetrisStack ts)
 	{	
 		boolean b = false;
@@ -196,6 +187,18 @@ public class TetrisBlock
 		return b;
 	}
 	
+	private void setSparks()
+	{
+		_sparks.clear();
+		
+		for(int i=0; i<_pattern[_index].length; i++)
+		{
+			Spark spark = new Spark(_dm);
+			spark.moveTo(locationCol() + _pattern[_index][i][0], locationRow() + _pattern[_index][i][1]);
+			_sparks.add(spark);
+		}		
+	}
+
 	private int locationCol()
 	{
 		return (int)_location.x;

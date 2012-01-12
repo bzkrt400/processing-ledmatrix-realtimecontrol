@@ -34,11 +34,11 @@ public class TetrisStack
 		return _sparks;
 	}
 	
-	public void merge(TetrisBlock tb)
+	public int merge(TetrisBlock tb)
 	{		
 		_sparks.addAll(tb.getSparks());		
 		
-		sweep();
+		return sweep();
 	}
 	
 	private void countSparkPerCol()
@@ -54,14 +54,17 @@ public class TetrisStack
 		}
 	}
 	
-	private void sweep()
+	private int sweep()
 	{
+		int score = 0;
+		
 		countSparkPerCol();
 		
 		for(int i=0; i<_dm.getColCount(); i++)
 		{
 			if(_sparksPerCol.get(i).size() == _dm.getRowCount())
 			{
+				score ++;
 				_sparks.removeAll(_sparksPerCol.get(i));
 				
 				for(int j=0; j<i; j++)
@@ -72,6 +75,8 @@ public class TetrisStack
 					}
 				}
 			}			
-		}		
+		}
+		
+		return score;
 	}
 }
