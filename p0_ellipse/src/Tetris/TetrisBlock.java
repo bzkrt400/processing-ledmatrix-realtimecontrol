@@ -6,9 +6,6 @@ import processing.core.PVector;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.Spark;
-
-
-
 public class TetrisBlock
 {
 	private final static int _patternAll[][][][] =
@@ -22,7 +19,7 @@ public class TetrisBlock
 		// O
 		{
 			{{0,0}, {1,0}, {1,1}, {0,1}},
-			{{0,0}, {1,0}, {1,1}, {0,1}},
+			//{{0,0}, {1,0}, {1,1}, {0,1}},
 		},
 		
 		// T
@@ -51,13 +48,13 @@ public class TetrisBlock
 		
 		// Z
 		{
-			{{0,0}, {0,1}, {1,1}, {1,2}},
-			{{0,2}, {1,2}, {1,1}, {2,1}},
+			{{0,2}, {0,1}, {1,1}, {1,0}},
+			{{0,1}, {1,1}, {1,2}, {2,2}},
 		},
 		
 		// S
 		{
-			{{0,2}, {1,2}, {1,1}, {2,1}},
+			{{0,1}, {1,1}, {1,0}, {2,0}},
 			{{0,0}, {0,1}, {1,1}, {1,2}},
 		},
 		
@@ -75,7 +72,7 @@ public class TetrisBlock
 		_dm = dm;
 		_sparks = new ArrayList<Spark>();
 		_location = new PVector(0,0);
-		 _pattern = _patternAll[pattern];
+		_pattern = _patternAll[pattern];
 		setSparks();
 	}
 	
