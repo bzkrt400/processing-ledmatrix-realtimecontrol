@@ -79,6 +79,7 @@ public class TetrisDigital extends TetrisSparks
 	public TetrisDigital(DotMatrix dm, int num, int col, int row)
 	{
 		super(dm);
+		_num = num;
 		super._pattern = _patternAll[_num];
 		
 		_col = col;
