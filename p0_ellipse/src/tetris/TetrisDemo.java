@@ -36,11 +36,8 @@ public class TetrisDemo extends PApplet
 		initBlocks();	
 		
 		ts = new TetrisStack(dm);			
-			
+		
 		dmd.display();
-		
-		
-		//noLoop();
 	}
 	
 	public void keyPressed()
@@ -143,7 +140,11 @@ public class TetrisDemo extends PApplet
 		ts.show();		
 		tscore.show();		
 		
+		
+		
 		sp.send();
+		
+		
 		
 		dmd.display();
 				
