@@ -73,8 +73,7 @@ public class TetrisDigital extends SparkArray
 		},  		
 	};
 	
-	private int _col, _row;
-	
+	private int _col, _row;	
 	private int _num;	
 	
 	public TetrisDigital(DotMatrix dm, int num, int col, int row)
