@@ -6,6 +6,7 @@ import processing.core.PVector;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.Spark;
+
 public class TetrisBlock
 {
 	private final static int _patternAll[][][][] =
