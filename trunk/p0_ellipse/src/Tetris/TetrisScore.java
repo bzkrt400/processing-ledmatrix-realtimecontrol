@@ -1,7 +1,6 @@
 package tetris;
 
 import java.util.ArrayList;
-
 import dotMatrix.DotMatrix;
 
 public class TetrisScore
