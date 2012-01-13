@@ -1,17 +1,15 @@
-package tetris;
+package dotMatrix;
 
 import java.util.ArrayList;
 
-import dotMatrix.DotMatrix;
-import dotMatrix.Spark;
 
-public class TetrisSparks
+public class SparkArray
 {
 	protected DotMatrix _dm;
 	protected ArrayList<Spark> _sparks;
 	protected int[][] _pattern;
 	
-	public TetrisSparks(DotMatrix dm)
+	public SparkArray(DotMatrix dm)
 	{
 		_dm = dm;
 		_sparks = new ArrayList<Spark>();

@@ -6,8 +6,9 @@ import processing.core.PVector;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.Spark;
+import dotMatrix.SparkArray;
 
-public class TetrisBlock extends TetrisSparks
+public class TetrisBlock extends SparkArray
 {
 	private final static int PATTERN_ALL[][][][] =
 	{

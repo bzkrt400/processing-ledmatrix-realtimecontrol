@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.Spark;
+import dotMatrix.SparkArray;
 
-public class TetrisStack extends TetrisSparks
+public class TetrisStack extends SparkArray
 {
 	private ArrayList<ArrayList<Spark>> _sparksPerCol;
 	

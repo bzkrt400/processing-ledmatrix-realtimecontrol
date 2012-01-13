@@ -1,8 +1,9 @@
 package tetris;
 
 import dotMatrix.DotMatrix;
+import dotMatrix.SparkArray;
 
-public class TetrisDigital extends TetrisSparks
+public class TetrisDigital extends SparkArray
 {
 	private final static int _patternAll[][][] =
 	{
