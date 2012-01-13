@@ -27,7 +27,7 @@ public class TetrisDemo extends PApplet
 		dm = new DotMatrix(48,7);		
 		dmd = new DotMatrixDisplay(this, dm);
 		
-		sp = new DotMatrixSerial(this, "COM1", dm);
+		sp = new DotMatrixSerial(this, "COM3", dm);
 		
 		score = 0;
 		tscore = new TetrisScore(dm, 2, 0, 0, score);
