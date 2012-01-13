@@ -29,7 +29,7 @@ public class TetrisDemo extends PApplet
 		
 		sp = new DotMatrixSerial(this, "COM3", dm);
 		
-		score = 0;
+		score =0;
 		tscore = new TetrisScore(dm, 2, 0, 0, score);
 		
 		tbNext = new TetrisBlock(dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));
