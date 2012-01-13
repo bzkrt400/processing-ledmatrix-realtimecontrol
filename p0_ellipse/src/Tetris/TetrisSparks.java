@@ -25,5 +25,17 @@ public class TetrisSparks
 		}
 	}
 	
+	protected void setSparks(int col, int row)
+	{
+		_sparks.clear();
+		
+		for(int i=0; i<_pattern.length; i++)
+		{
+			Spark spark = new Spark(_dm);
+			spark.moveTo(col + _pattern[i][0], row + _pattern[i][1]);
+			_sparks.add(spark);
+		}		
+	}	
+	
 	
 }

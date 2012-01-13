@@ -1,7 +1,6 @@
 package tetris;
 
 import dotMatrix.DotMatrix;
-import dotMatrix.Spark;
 
 public class TetrisDigital extends TetrisSparks
 {
@@ -80,26 +79,15 @@ public class TetrisDigital extends TetrisSparks
 	public TetrisDigital(DotMatrix dm, int num, int col, int row)
 	{
 		super(dm);
-		_pattern = _patternAll[_num];
+		super._pattern = _patternAll[_num];
 		
 		_col = col;
 		_row = row;
 		_num = num % _patternAll.length;
 		
-		setSparks(_col, _row);		
-		
+		super.setSparks(_col, _row);
 	}	
 	
-	private void setSparks(int col, int row)
-	{
-		_sparks.clear();
-		
-		for(int i=0; i<_pattern.length; i++)
-		{
-			Spark spark = new Spark(_dm);
-			spark.moveTo(col + _pattern[i][0], row + _pattern[i][1]);
-			_sparks.add(spark);
-		}		
-	}	
+	
 		
 }
