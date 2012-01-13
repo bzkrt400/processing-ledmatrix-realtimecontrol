@@ -1,11 +1,8 @@
-package Tetris;
-
-import java.util.ArrayList;
+package tetris;
 
 import dotMatrix.DotMatrix;
-import dotMatrix.Spark;
 
-public class TetrisDigital
+public class TetrisDigital extends TetrisSparks
 {
 	private final static int _patternAll[][][] =
 	{
@@ -75,41 +72,21 @@ public class TetrisDigital
 		},  		
 	};
 	
-	private DotMatrix _dm;
 	private int _col, _row;
-	private ArrayList<Spark> _sparks;
-	private int _num;
-	private int[][] _pattern;
+	
+	private int _num;	
 	
 	public TetrisDigital(DotMatrix dm, int num, int col, int row)
 	{
-		_dm = dm;
-		_sparks = new ArrayList<Spark>();
+		super(dm);
+		_pattern = _patternAll[_num];
+		
 		_col = col;
 		_row = row;
 		_num = num % _patternAll.length;
-		_pattern = _patternAll[_num];
-		setSparks();
-	}
-	
-	private void setSparks()
-	{
-		_sparks.clear();
 		
-		for(int i=0; i<_pattern.length; i++)
-		{
-			Spark spark = new Spark(_dm);
-			spark.moveTo(_col + _pattern[i][0], _row + _pattern[i][1]);
-			_sparks.add(spark);
-		}		
-	}
-	
-	public void show()
-	{
-		for (Spark spark : _sparks)
-		{
-			spark.show();
-		}
-	}
-	
+		super.setSparks(_col, _row);		
+		
+	}	
+		
 }

@@ -27,7 +27,7 @@ public class FlashDemo extends PApplet
 		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
 		dmd.setColor(0xffff0000, 0xffffffff);
 		
-		sp = new DotMatrixSerial(this, "COM3", dm);
+		sp = new DotMatrixSerial(this, "COM1", dm);
 		
 		alSparks = new ArrayList<Spark>();
 		for(int i=0; i<6; i++)
