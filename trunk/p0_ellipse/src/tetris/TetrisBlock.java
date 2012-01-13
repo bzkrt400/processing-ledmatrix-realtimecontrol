@@ -7,9 +7,9 @@ import processing.core.PVector;
 import dotMatrix.DotMatrix;
 import dotMatrix.Spark;
 
-public class TetrisBlock
+public class TetrisBlock extends TetrisSparks
 {
-	private final static int _patternAll[][][][] =
+	private final static int PATTERN_ALL[][][][] =
 	{
 		// l
 		{
@@ -61,20 +61,18 @@ public class TetrisBlock
 		
 	};
 	
-	private DotMatrix _dm;	
+	private int _patternID;	
 	private int _index;
-	private PVector _location;
-	private ArrayList<Spark> _sparks;
-	
-	private int[][][] _pattern;
+	private PVector _location;		
 	
 	public TetrisBlock(DotMatrix dm, int pattern, int index)
 	{
-		_dm = dm;
-		_sparks = new ArrayList<Spark>();
+		super(dm);
+	
 		_location = new PVector(2,2);
-		_pattern = _patternAll[pattern];
-		_index = index % _pattern.length;		
+		_patternID = pattern;
+		_index = index % countIndex();
+		
 		setSparks();
 	}
 	
@@ -91,22 +89,12 @@ public class TetrisBlock
 	
 	public int countIndex()
 	{
-		return _pattern.length;
-	}
-	
-	
-	
-	public void show()
-	{
-		for (Spark spark : _sparks)
-		{
-			spark.show();
-		}
+		return PATTERN_ALL[_patternID].length;
 	}
 	
 	public static int getPatternCount()
 	{
-		return _patternAll.length;
+		return PATTERN_ALL.length;
 	}
 
 	private void tryChange(TetrisDirection t)
@@ -127,11 +115,11 @@ public class TetrisBlock
 				break;
 			case CLOCKWISE:
 				_index ++;
-				if (_index == _pattern.length) _index = 0;
+				if (_index == countIndex()) _index = 0;
 				break;
 			case ANTI_CLOCKWISE:
 				_index --;
-				if (_index == -1) _index = _pattern.length - 1;
+				if (_index == -1) _index = countIndex() - 1;
 				break;
 			default:
 				break;
@@ -190,14 +178,8 @@ public class TetrisBlock
 	
 	private void setSparks()
 	{
-		_sparks.clear();
-		
-		for(int i=0; i<_pattern[_index].length; i++)
-		{
-			Spark spark = new Spark(_dm);
-			spark.moveTo(locationCol() + _pattern[_index][i][0], locationRow() + _pattern[_index][i][1]);
-			_sparks.add(spark);
-		}		
+		_pattern = PATTERN_ALL[_patternID][_index];
+		super.setSparks(locationCol(), locationRow());
 	}
 
 	private int locationCol()
