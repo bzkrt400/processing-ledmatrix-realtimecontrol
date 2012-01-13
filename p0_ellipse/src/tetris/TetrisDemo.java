@@ -16,8 +16,7 @@ public class TetrisDemo extends PApplet
 	
 	private TetrisBlock tb;
 	private TetrisBlock tbNext;
-	private TetrisStack ts;
-	
+	private TetrisStack ts;	
 	
 	private TetrisScore tscore;
 	private int score;
@@ -27,7 +26,7 @@ public class TetrisDemo extends PApplet
 		dm = new DotMatrix(48,7);		
 		dmd = new DotMatrixDisplay(this, dm);
 		
-		sp = new DotMatrixSerial(this, "COM1", dm);
+		sp = new DotMatrixSerial(this, "COM3", dm);
 		
 		score =0;
 		tscore = new TetrisScore(dm, 2, 0, 0, score);
@@ -36,10 +35,12 @@ public class TetrisDemo extends PApplet
 		
 		initBlocks();	
 		
-		ts = new TetrisStack(dm);				
-		
-		tb.show();
+		ts = new TetrisStack(dm);			
+			
 		dmd.display();
+		
+		
+		//noLoop();
 	}
 	
 	public void keyPressed()
@@ -80,8 +81,6 @@ public class TetrisDemo extends PApplet
 		
 		if (t != null)
 			tb.change(t,ts);
-		
-		//this.display();
 	}
 	
 	public void draw()
@@ -141,15 +140,13 @@ public class TetrisDemo extends PApplet
 		tbNext.show();
 		tb.show();
 		
-		ts.show();
-		
-		tscore.show();
+		ts.show();		
+		tscore.show();		
 		
 		sp.send();
 		
-		dmd.display();	
-		
-		delay(100);
-		
+		dmd.display();
+				
+		delay(100);		
 	}
 }
