@@ -38,8 +38,7 @@ public class DotMatrixDemo
 	}
 	
 	public void display()
-	{
-		
+	{		
 		if (_sp_enable)
 			_sp.send();	
 		

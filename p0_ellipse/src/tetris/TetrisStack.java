@@ -51,7 +51,7 @@ public class TetrisStack extends SparkArray
 		
 		countSparkPerCol();
 		
-		for(int i=0; i<_dm.getColCount(); i++)
+		for(int i=0; i<_sparksPerCol.size(); i++)
 		{
 			if(_sparksPerCol.get(i).size() == _dm.getRowCount())
 			{
@@ -69,5 +69,16 @@ public class TetrisStack extends SparkArray
 		}
 		
 		return score;
+	}
+	
+	public int getHeight()
+	{
+		int i;
+		for(i=0; i<_sparksPerCol.size(); i++)
+		{
+			if (_sparksPerCol.get(i).size() != 0) break;
+		}
+		
+		return i;
 	}
 }
