@@ -1,7 +1,7 @@
 package tetris;
 
 import dotMatrix.DotMatrix;
-import dotMatrix.Demo.DotMatrixDemo;
+import dotMatrix.DotMatrixDemo;
 import processing.core.PApplet;
 
 public class TetrisDemo extends PApplet

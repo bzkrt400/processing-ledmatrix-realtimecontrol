@@ -1,9 +1,6 @@
-package dotMatrix.Demo;
+package dotMatrix;
 
 import processing.core.PApplet;
-import dotMatrix.DotMatrix;
-import dotMatrix.DotMatrixDisplay;
-import dotMatrix.DotMatrixSerial;
 
 public class DotMatrixDemo
 {
@@ -28,6 +25,11 @@ public class DotMatrixDemo
 			_sp_enable = true;
 			_sp = new DotMatrixSerial(_parent, PortName, _dm);
 		}
+	}
+	
+	public void SetDisplayStyle(int dotWidth, int margin)
+	{
+		_dmd = new DotMatrixDisplay(_parent, _dm, dotWidth, margin);
 	}
 	
 	public DotMatrix getDM()

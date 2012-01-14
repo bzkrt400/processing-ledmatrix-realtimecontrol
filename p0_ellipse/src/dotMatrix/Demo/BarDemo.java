@@ -5,38 +5,29 @@ import ddf.minim.Minim;
 import ddf.minim.analysis.FFT;
 import dotMatrix.Bar;
 import dotMatrix.DotMatrix;
-import dotMatrix.DotMatrixDisplay;
-import dotMatrix.DotMatrixSerial;
+import dotMatrix.DotMatrixDemo;
 import processing.core.PApplet;
 
 public class BarDemo extends PApplet
 {
 	private static final long serialVersionUID = -2935931867398743145L;
 
-	private DotMatrix dm;
-	private DotMatrixDisplay dmd;	
-	private DotMatrixSerial sp;
+	private DotMatrix _dm;
+	
+	private DotMatrixDemo dmDemo;
+	
 	private Bar bars[];
-	
-	private int dotWidth = 20;
-	private int margin = 10;
-	
+
 	Minim minim;
 	AudioPlayer ap;
 	FFT fft;
 
 	public void setup()
 	{
-		dm = new DotMatrix(48, 7);
+		dmDemo = new DotMatrixDemo(this, 48, 7, "COM3");
+		_dm = dmDemo.getDM();
 		
-		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
-		dmd.setColor(0xffff0000, 0xffffffff);
-		
-		sp = new DotMatrixSerial(this, "COM3", dm);
 		bars = new Bar[48];
-		
-		dmd.display();
-		sp.send();		
 		
 		minim = new Minim(this);  
 		ap = minim.loadFile("sample.mp3", 512);
@@ -47,21 +38,18 @@ public class BarDemo extends PApplet
 				
 		for(int i=0; i<bars.length; i++)
 		{	
-			bars[i] = new Bar(dm, i);
-			bars[i].setHeight(i%(dm.getRowCount()+1));
+			bars[i] = new Bar(_dm, i);
+			bars[i].setHeight(i%(_dm.getRowCount()+1));
 			bars[i].show();			
-		}
-		
-		dmd.display();
-		sp.send();
+		}	
 	}
 	
 	public void draw()
 	{
-		dm.clear(false);
+		_dm.clear(false);
 		fft.forward(ap.mix);
 		
-		for(int i = 0; i < dm.getColCount() / 3 && i< fft.avgSize(); i++)
+		for(int i = 0; i < _dm.getColCount() / 3 && i< fft.avgSize(); i++)
 		{
 			int h =  constrain((int)(2.5* log(fft.getAvg(i))), 0, 7);
 			bars[3*i].setHeight(h);
@@ -70,8 +58,7 @@ public class BarDemo extends PApplet
 			bars[3*i+1].show();
 	    }
 		
-		dmd.display();
-		sp.send();
+		dmDemo.display();
 	}
 	
 	public void stop()
