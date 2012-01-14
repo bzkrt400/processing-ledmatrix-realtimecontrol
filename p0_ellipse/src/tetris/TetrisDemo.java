@@ -126,8 +126,7 @@ public class TetrisDemo extends PApplet
 				break;
 		}
 		
-		return points;
-		
+		return points;		
 	}
 	
 	private void display()
@@ -138,13 +137,9 @@ public class TetrisDemo extends PApplet
 		tb.show();
 		
 		ts.show();		
-		tscore.show();		
+		tscore.show();			
 		
-		
-		
-		sp.send();
-		
-		
+		sp.send();	
 		
 		dmd.display();
 				

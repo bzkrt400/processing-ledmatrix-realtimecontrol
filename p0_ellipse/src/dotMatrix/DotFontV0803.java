@@ -1,9 +1,7 @@
-package tetris;
+package dotMatrix;
 
-import dotMatrix.DotFontV;
-import dotMatrix.DotMatrix;
 
-public class TetrisDigital extends DotFontV
+public class DotFontV0803 extends DotFontV
 {
 	private final static int PATTERN_FONT[][] =
 	{
@@ -19,7 +17,7 @@ public class TetrisDigital extends DotFontV
 		{0x1f, 0x15, 0x17},
 	};
 	
-	public TetrisDigital(DotMatrix dm, int num, int col, int row)
+	public DotFontV0803(DotMatrix dm, int num, int col, int row)
 	{
 		super(dm, PATTERN_FONT[num], col, row);		
 	}	
