@@ -3,8 +3,7 @@ package dotMatrix.Demo;
 import java.util.ArrayList;
 
 import dotMatrix.DotMatrix;
-import dotMatrix.DotMatrixDisplay;
-import dotMatrix.DotMatrixSerial;
+import dotMatrix.DotMatrixDemo;
 import dotMatrix.Spark;
 import processing.core.PApplet;
 
@@ -12,29 +11,27 @@ public class FlashDemo extends PApplet
 {	
 	private static final long serialVersionUID = -1596293397312990840L;
 	
-	private DotMatrix dm;
-	private DotMatrixDisplay dmd;	
-	private DotMatrixSerial sp;
+	private DotMatrix _dm;
+	private DotMatrixDemo dmDemo;
 	
+	private ArrayList<Spark> alSparks;
+	
+	private int dotDistance = 22;
 	private int dotWidth = 20;
 	private int margin = 10;
-	private ArrayList<Spark> alSparks;
+	
 	
 	public void setup() 
 	{
-		dm = new DotMatrix(48, 7);
-		
-		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
-		dmd.setColor(0xffff0000, 0xffffffff);
-		
-		sp = new DotMatrixSerial(this, "COM3", dm);
-		
+		dmDemo = new DotMatrixDemo(this, 48, 7, "COM3");
+		dmDemo.SetDisplayStyle(dotWidth, margin);
+		_dm = dmDemo.getDM();
+				
 		alSparks = new ArrayList<Spark>();
 		for(int i=0; i<6; i++)
-			alSparks.add(new Spark(dm));		  
+			alSparks.add(new Spark(_dm));		  
 		
-		dmd.display();
-		sp.send();
+		dmDemo.display();
 	}
 
 	public void draw()
@@ -59,16 +56,15 @@ public class FlashDemo extends PApplet
 	{	
 		if(mouseButton == LEFT)
 		{
-			int c = (mouseX - margin) / dmd.getDotDistance();
-			int r = (mouseY - margin) / dmd.getDotDistance();		
+			int c = (mouseX - margin) / dotDistance;
+			int r = (mouseY - margin) / dotDistance;		
 			
-			if (r < 0 || c <0 || r >= dm.getRowCount() || c >= dm.getColCount()) return;			
+			if (r < 0 || c <0 || r >= _dm.getRowCount() || c >= _dm.getColCount()) return;			
 			
-			dm.reverseDot(r, c);		
+			_dm.reverseDot(r, c);		
 		}
 		
-		dmd.display();		
-		sp.send();
+		dmDemo.display();
 	}	
 
 }
