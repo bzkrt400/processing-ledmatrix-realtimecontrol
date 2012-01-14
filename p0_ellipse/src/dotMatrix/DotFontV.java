@@ -1,10 +1,10 @@
 package dotMatrix;
 
-public class DotFont extends SparkArray
+public class DotFontV extends SparkArray
 {
 	protected int[] _font;
 	
-	public DotFont(DotMatrix dm, int[] font, int col, int row)
+	public DotFontV(DotMatrix dm, int[] font, int col, int row)
 	{
 		super(dm);
 		_font = font;
@@ -22,7 +22,7 @@ public class DotFont extends SparkArray
 				if ((_font[c] & (0x01<<r)) == (0x01<<r))
 				{
 					Spark spark = new Spark(_dm);
-					spark.moveTo(col + c, row + r);
+					spark.moveTo(col + r, row + c);
 					_sparks.add(spark);
 				}
 			}

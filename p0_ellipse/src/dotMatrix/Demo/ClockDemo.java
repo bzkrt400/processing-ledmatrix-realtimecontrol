@@ -59,9 +59,7 @@ public class ClockDemo extends PApplet
 		{
 			font.show();
 		}
-		
-		
-		
+				
 		for (DotFont font : alColons)
 		{
 			font.show();
