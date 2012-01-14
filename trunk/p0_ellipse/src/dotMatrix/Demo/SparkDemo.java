@@ -12,8 +12,7 @@ public class SparkDemo extends PApplet
 	private static final long serialVersionUID = -3966570181465468437L;
 
 	private DotMatrix _dm;
-	private DotMatrixDemo dmDemo;
-	
+	private DotMatrixDemo dmDemo;	
 	
 	private ArrayList<Spark> alSparks;
 	

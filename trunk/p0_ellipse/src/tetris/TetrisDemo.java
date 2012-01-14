@@ -1,5 +1,9 @@
 package tetris;
 
+import java.util.ArrayList;
+
+import dotMatrix.DotFont;
+import dotMatrix.DotFont.FontDirection;
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDemo;
 import processing.core.PApplet;
@@ -19,12 +23,22 @@ public class TetrisDemo extends PApplet
 	
 	private TetrisScore tscore;
 	private int score = 0;
-		
+	private boolean playing; 
+	
+	private int[][] frame ={{0x7f},{0x41}};
+	private int[][] frameLoaction = {{6,0}, {11, 0}};
+	private ArrayList<DotFont> df;
+	
 	public void setup()
 	{
 		dmDemo = new DotMatrixDemo(this, 48, 7, "COM3");
 		_dm = dmDemo.getDM();
 		
+		df = new ArrayList<DotFont>();
+		
+		for(int i=0; i<frame.length; i++)			
+			df.add(new DotFont(_dm, frame[i], frameLoaction[i][0], frameLoaction[i][1], FontDirection.HORIZ0NTAL));
+			
 		tscore = new TetrisScore(_dm, 2, 0, 0, score);
 		
 		tbNext = new TetrisBlock(_dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));		
@@ -32,11 +46,19 @@ public class TetrisDemo extends PApplet
 		
 		ts = new TetrisStack(_dm);			
 		
-		this.display();
+		playing = false;
+		
+		noLoop();
 	}
 	
 	public void keyPressed()
 	{		
+		if (!playing)
+		{
+			playing = true;
+			loop();
+		}
+		
 		TetrisDirection t = null;
 		
 		switch(key) 
@@ -76,7 +98,7 @@ public class TetrisDemo extends PApplet
 	}
 	
 	public void draw()
-	{			
+	{		
 		boolean b = tb.change(TetrisDirection.RIGHT, ts);	
 		
 		if (b)
@@ -84,6 +106,12 @@ public class TetrisDemo extends PApplet
 			score += calcScore(ts.merge(tb));
 			tscore = new TetrisScore(_dm, 2, 0, 0, score);
 			initBlocks();
+			
+			if (ts.getHeight()<12)
+			{
+				playing = false;
+				noLoop();				
+			}
 		}			
 		
 		this.display();		
@@ -92,10 +120,10 @@ public class TetrisDemo extends PApplet
 	private void initBlocks()
 	{
 		tb = tbNext;
-		tb.moveTo(10, 2);
+		tb.moveTo(11, 2);
 		
 		tbNext = new TetrisBlock(_dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));
-		tbNext.moveTo(6, 2);		
+		tbNext.moveTo(8, 2);		
 	}
 	
 	private int calcScore(int rowsSweeped)
@@ -109,6 +137,11 @@ public class TetrisDemo extends PApplet
 	protected void display()
 	{
 		_dm.clear(false);
+		
+		for (DotFont dfont : df)
+		{
+			dfont.show();
+		}
 		
 		tbNext.show();
 		tb.show();
