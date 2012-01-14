@@ -1,7 +1,7 @@
 package dotMatrix;
 
 
-public class DotFontV0803 extends DotFontV
+public class DotFont0503 extends DotFont
 {
 	private final static int PATTERN_FONT[][] =
 	{
@@ -17,9 +17,9 @@ public class DotFontV0803 extends DotFontV
 		{0x1f, 0x15, 0x17},
 	};
 	
-	public DotFontV0803(DotMatrix dm, int num, int col, int row)
+	public DotFont0503(DotMatrix dm, int num, int col, int row, FontDirection direction)
 	{
-		super(dm, PATTERN_FONT[num], col, row);		
+		super(dm, PATTERN_FONT[num], col, row, direction);		
 	}	
 		
 }

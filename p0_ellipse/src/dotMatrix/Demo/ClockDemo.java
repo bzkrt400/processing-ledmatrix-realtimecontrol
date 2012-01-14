@@ -3,6 +3,7 @@ package dotMatrix.Demo;
 import java.util.ArrayList;
 
 import dotMatrix.DotFont;
+import dotMatrix.DotFont.FontDirection;
 import dotMatrix.DotFont0706;
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDisplay;
@@ -36,22 +37,22 @@ public class ClockDemo extends PApplet
 		alFonts = new ArrayList<DotFont0706>();
 		alColons = new ArrayList<DotFont>();
 		
-		alColons.add(new DotFont(dm, font, 16, 0));
-		alColons.add(new DotFont(dm, font, 30, 0));
+		alColons.add(new DotFont(dm, font, 16, 0, FontDirection.HORIZ0NTAL));
+		alColons.add(new DotFont(dm, font, 30, 0, FontDirection.HORIZ0NTAL));
 	}
 	
 	public void draw()
 	{
 		alFonts.clear();
 		
-		alFonts.add(new DotFont0706(dm, hour() / 10, 4, 0));
-		alFonts.add(new DotFont0706(dm, hour() % 10, 10, 0));
+		alFonts.add(new DotFont0706(dm, hour() / 10, 4, 0, FontDirection.HORIZ0NTAL));
+		alFonts.add(new DotFont0706(dm, hour() % 10, 10, 0, FontDirection.HORIZ0NTAL));
 		
-		alFonts.add(new DotFont0706(dm, minute() / 10, 18, 0));
-		alFonts.add(new DotFont0706(dm, minute() % 10, 24, 0));
+		alFonts.add(new DotFont0706(dm, minute() / 10, 18, 0, FontDirection.HORIZ0NTAL));
+		alFonts.add(new DotFont0706(dm, minute() % 10, 24, 0, FontDirection.HORIZ0NTAL));
 		
-		alFonts.add(new DotFont0706(dm, second() / 10, 32, 0));
-		alFonts.add(new DotFont0706(dm, second() % 10, 38, 0));		
+		alFonts.add(new DotFont0706(dm, second() / 10, 32, 0, FontDirection.HORIZ0NTAL));
+		alFonts.add(new DotFont0706(dm, second() % 10, 38, 0, FontDirection.HORIZ0NTAL));		
 		
 		dm.clear(false);
 		

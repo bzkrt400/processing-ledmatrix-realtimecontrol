@@ -18,9 +18,9 @@ public class DotFont0706 extends DotFont
 		{0x4f, 0x4f, 0x49, 0x7f, 0x7f},		//9
 	};
 	
-	public DotFont0706(DotMatrix dm, int num, int col, int row)
+	public DotFont0706(DotMatrix dm, int num, int col, int row, FontDirection direction)
 	{
-		super(dm, PATTERN_FONT[num], col, row);		
+		super(dm, PATTERN_FONT[num], col, row, direction);		
 	}	
 }
 

@@ -1,18 +1,20 @@
 package tetris;
 
 import java.util.ArrayList;
+
+import dotMatrix.DotFont.FontDirection;
 import dotMatrix.DotMatrix;
-import dotMatrix.DotFontV0803;
+import dotMatrix.DotFont0503;
 
 public class TetrisScore
 {
-	ArrayList<DotFontV0803> _digitals;
+	ArrayList<DotFont0503> _digitals;
 	DotMatrix _dm;
 	
 	public TetrisScore(DotMatrix dm, int digiCount, int col, int row, int value)
 	{
 		_dm = dm;
-		_digitals = new ArrayList<DotFontV0803>();
+		_digitals = new ArrayList<DotFont0503>();
 		
 		for(int i=0; i<digiCount; i++)
 		{
@@ -21,13 +23,13 @@ public class TetrisScore
 			for (int j=0; j<i; j++)
 				ten *= 10;			
 			
-			_digitals.add(new DotFontV0803(_dm, (value / ten) % 10 , col, row + 4*i));
+			_digitals.add(new DotFont0503(_dm, (value / ten) % 10 , col, row + 4*i, FontDirection.VERTICAL));
 		}		
 	}
 	
 	public void show()
 	{
-		for (DotFontV0803 digi : _digitals)
+		for (DotFont0503 digi : _digitals)
 		{
 			digi.show();
 		}
