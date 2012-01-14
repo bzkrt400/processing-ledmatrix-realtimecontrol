@@ -78,7 +78,5 @@ public class DotMatrixDisplay
 				_parent.popMatrix();
 			}
 		}
-	}
-	
-	
+	}	
 }

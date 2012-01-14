@@ -1,43 +1,38 @@
 package tetris;
 
 import dotMatrix.DotMatrix;
-import dotMatrix.DotMatrixDisplay;
-import dotMatrix.DotMatrixSerial;
+import dotMatrix.Demo.DotMatrixDemo;
 import processing.core.PApplet;
 
 public class TetrisDemo extends PApplet
 {
-	private static final long serialVersionUID = 4522547351037250574L;
+	private static final long serialVersionUID = 87901132768588420L;
+
+	private static final int[] SCORE = {0, 1, 3, 6, 10};
 	
-	private DotMatrix dm;	
-	private DotMatrixDisplay dmd;
-	
-	private DotMatrixSerial sp;
+	private DotMatrixDemo dmDemo;
+	private DotMatrix _dm;
 	
 	private TetrisBlock tb;
 	private TetrisBlock tbNext;
 	private TetrisStack ts;	
 	
 	private TetrisScore tscore;
-	private int score;
-	
+	private int score = 0;
+		
 	public void setup()
 	{
-		dm = new DotMatrix(48,7);		
-		dmd = new DotMatrixDisplay(this, dm);
+		dmDemo = new DotMatrixDemo(this, 48, 7, "COM3");
+		_dm = dmDemo.getDM();
 		
-		sp = new DotMatrixSerial(this, "COM3", dm);
+		tscore = new TetrisScore(_dm, 2, 0, 0, score);
 		
-		score =0;
-		tscore = new TetrisScore(dm, 2, 0, 0, score);
-		
-		tbNext = new TetrisBlock(dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));
-		
+		tbNext = new TetrisBlock(_dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));		
 		initBlocks();	
 		
-		ts = new TetrisStack(dm);			
+		ts = new TetrisStack(_dm);			
 		
-		dmd.display();
+		this.display();
 	}
 	
 	public void keyPressed()
@@ -87,7 +82,7 @@ public class TetrisDemo extends PApplet
 		if (b)
 		{				
 			score += calcScore(ts.merge(tb));
-			tscore = new TetrisScore(dm, 2, 0, 0, score);
+			tscore = new TetrisScore(_dm, 2, 0, 0, score);
 			initBlocks();
 		}			
 		
@@ -99,39 +94,21 @@ public class TetrisDemo extends PApplet
 		tb = tbNext;
 		tb.moveTo(10, 2);
 		
-		tbNext = new TetrisBlock(dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));
+		tbNext = new TetrisBlock(_dm, (int)random(TetrisBlock.getPatternCount()), (int)random(4));
 		tbNext.moveTo(6, 2);		
 	}
 	
 	private int calcScore(int rowsSweeped)
 	{
-		int points=0;
-		
-		switch(rowsSweeped)
-		{
-			case 1:
-				points = 1;
-				break;
-			case 2:
-				points = 3;
-				break;
-			case 3:
-				points = 6;
-				break;
-			case 4:
-				points = 10;
-				break;
-			default:
-				points = 0;
-				break;
-		}
-		
-		return points;		
+		if (rowsSweeped < SCORE.length && rowsSweeped >= 0)
+			return SCORE[rowsSweeped];
+		else
+			return 0;
 	}
 	
-	private void display()
+	protected void display()
 	{
-		dm.clear(false);
+		_dm.clear(false);
 		
 		tbNext.show();
 		tb.show();
@@ -139,9 +116,7 @@ public class TetrisDemo extends PApplet
 		ts.show();		
 		tscore.show();			
 		
-		sp.send();	
-		
-		dmd.display();
+		dmDemo.display();
 				
 		delay(100);		
 	}
