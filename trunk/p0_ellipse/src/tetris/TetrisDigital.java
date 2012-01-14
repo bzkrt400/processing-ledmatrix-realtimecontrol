@@ -1,94 +1,27 @@
 package tetris;
 
+import dotMatrix.DotFontV;
 import dotMatrix.DotMatrix;
-import dotMatrix.SparkArray;
 
-public class TetrisDigital extends SparkArray
+public class TetrisDigital extends DotFontV
 {
-	private final static int _patternAll[][][] =
+	private final static int PATTERN_FONT[][] =
 	{
-		//0
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {4,1},
-			{0,2}, {1,2}, {2,2}, {3,2}, {4,2},
-		},
-		
-		//1
-		{
-			{0,1}, {1,1}, {2,1}, {3,1}, {4,1},			
-		}, 
-		
-		//2
-		{
-			{0,0}, {1,0}, {2,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {2,2}, {3,2}, {4,2},
-		},
-		
-		//3
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {2,2}, {4,2},
-		},		 
-		
-		//4
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{3,1},
-			{0,2}, {1,2}, {2,2}, {3,2},
-		},
-		
-		//5
-		{
-			{0,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {1,2}, {2,2}, {4,2},
-		},  
-		
-		//6
-		{
-			{0,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {1,2}, {2,2}, {3,2}, {4,2},
-		},  	
-		//7
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, 
-			{0,2}, 
-		},  		
-		//8
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {1,2}, {2,2}, {3,2}, {4,2},
-		},  
-		//9
-		{
-			{0,0}, {1,0}, {2,0}, {3,0}, {4,0}, 
-			{0,1}, {2,1}, {4,1},
-			{0,2}, {1,2}, {2,2}, {4,2},
-		},  		
+		{0x1f, 0x11, 0x1f},
+		{0x00, 0x1f, 0x00},
+		{0x17, 0x15, 0x1d},
+		{0x1f, 0x15, 0x15},
+		{0x1f, 0x08, 0x0f},
+		{0x1d, 0x15, 0x17},
+		{0x1d, 0x15, 0x1f},
+		{0x1f, 0x01, 0x01},
+		{0x1f, 0x15, 0x1f},
+		{0x1f, 0x15, 0x17},
 	};
-	
-	private int _col, _row;	
-	private int _num;	
 	
 	public TetrisDigital(DotMatrix dm, int num, int col, int row)
 	{
-		super(dm);
-		_num = num;
-		super._pattern = _patternAll[_num];
-		
-		_col = col;
-		_row = row;
-		_num = num % _patternAll.length;
-		
-		super.setSparks(_col, _row);
+		super(dm, PATTERN_FONT[num], col, row);		
 	}	
-	
-	
 		
 }
