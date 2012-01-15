@@ -1,3 +1,8 @@
+/// Tetris Demo 
+/// Author: Weihong Guan (weihong.guan@gmail.com)
+/// Updated on Jan 15, 2011
+/// Description: Tetris base on Processing, Arduino and M2407 LED Matrix Display
+
 package tetris;
 
 import java.util.ArrayList;
