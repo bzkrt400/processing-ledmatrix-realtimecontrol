@@ -85,11 +85,14 @@ public class DotMatrixDisplay
 		int index = -1;
 		
 		int c = (mouseX - _margin) / _dotDistance;
-		int r = (mouseY - _margin) / _dotDistance;		
+		int r = (mouseY - _margin) / _dotDistance;
 		
-		if (r < 0 || c <0 || r >= _dm.getRowCount() || c >= _dm.getColCount()) index = -1;
-		
-		index = _dm.getIndx(r, c);
+		if (mouseX < _margin || mouseY < _margin)
+			index = -1;
+		else if (r >= _dm.getRowCount() || c >= _dm.getColCount())
+			index = -1;
+		else
+			index = _dm.getIndx(r, c);
 		
 		return index;		
 		
