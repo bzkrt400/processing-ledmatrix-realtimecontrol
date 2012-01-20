@@ -18,7 +18,6 @@ public class FlashDemo extends PApplet
 	
 	private ArrayList<Spark> alSparks;
 	
-	private int dotDistance = 18;
 	private int dotWidth = 16;
 	private int margin = 10;
 	
