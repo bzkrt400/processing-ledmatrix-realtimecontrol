@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDemo;
+import dotMatrix.DotMatrixDisplay;
 import dotMatrix.Spark;
 import processing.core.PApplet;
 
@@ -13,6 +14,7 @@ public class FlashDemo extends PApplet
 	
 	private DotMatrix _dm;
 	private DotMatrixDemo dmDemo;
+	private DotMatrixDisplay _dmd;
 	
 	private ArrayList<Spark> alSparks;
 	
@@ -26,6 +28,7 @@ public class FlashDemo extends PApplet
 		dmDemo = new DotMatrixDemo(this, 72, 7, "COM3");
 		dmDemo.SetDisplayStyle(dotWidth, margin);
 		_dm = dmDemo.getDM();
+		_dmd = dmDemo.getDotMatrixDisplay();
 				
 		alSparks = new ArrayList<Spark>();
 		for(int i=0; i<6; i++)
@@ -56,12 +59,11 @@ public class FlashDemo extends PApplet
 	{	
 		if(mouseButton == LEFT)
 		{
-			int c = (mouseX - margin) / dotDistance;
-			int r = (mouseY - margin) / dotDistance;		
-			
-			if (r < 0 || c <0 || r >= _dm.getRowCount() || c >= _dm.getColCount()) return;			
-			
-			_dm.reverseDot(r, c);		
+			int index =_dmd.getDotIndex(mouseX, mouseY); 
+			if (index != -1)
+			{				
+				_dm.reverseDot(index);
+			}
 		}
 		
 		dmDemo.display();

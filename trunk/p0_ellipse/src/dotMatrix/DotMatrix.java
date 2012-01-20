@@ -70,7 +70,7 @@ public class DotMatrix
 		}
 	}
 	
-	private int getIndx(int row, int col)
+	public int getIndx(int row, int col)
 	{		
 		int i = _colCount * row + col;
 		return (i);
@@ -80,6 +80,11 @@ public class DotMatrix
 	{		
 		int i = getIndx(row, col);
 		_dots[i].reverse();
+	}
+	
+	public void reverseDot(int index)
+	{		
+		_dots[index].reverse();
 	}
 	
 	public void setDot(int row, int col, boolean b)
