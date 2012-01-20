@@ -7,8 +7,6 @@ import dotMatrix.DotFont.FontDirection;
 import dotMatrix.DotFont0706;
 import dotMatrix.DotMatrix;
 import dotMatrix.DotMatrixDemo;
-import dotMatrix.DotMatrixDisplay;
-import dotMatrix.DotMatrixSerial;
 import processing.core.PApplet;
 
 public class ClockDemo extends PApplet
