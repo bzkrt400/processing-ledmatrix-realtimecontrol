@@ -111,11 +111,11 @@ public class DotMatrix
 		{
 			if (_dots[i].isOn())
 			{
-				_pScreen[i/8] |= bv(7-i%8);
+				_pScreen[i/8] |= bv(i%8);
 			}
 			else
 			{
-				_pScreen[i/8] &= lv(7-i%8);
+				_pScreen[i/8] &= lv(i%8);
 			}
 		}		
 		return _pScreen;
