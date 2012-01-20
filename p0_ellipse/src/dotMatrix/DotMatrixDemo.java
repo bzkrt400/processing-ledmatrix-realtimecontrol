@@ -37,6 +37,11 @@ public class DotMatrixDemo
 		return _dm;
 	}
 	
+	public DotMatrixDisplay getDotMatrixDisplay()
+	{
+		return _dmd;
+	}
+	
 	public void display()
 	{		
 		if (_sp_enable)

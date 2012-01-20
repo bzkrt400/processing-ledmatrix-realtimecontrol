@@ -27,7 +27,7 @@ public class ClockDemo extends PApplet
 		
 	public void setup()
 	{
-		dm = new DotMatrix(48, 7);
+		dm = new DotMatrix(72, 7);
 		
 		dmd = new DotMatrixDisplay(this, dm, dotWidth, margin);
 		dmd.setColor(0xffff0000, 0xffffffff);

@@ -79,4 +79,19 @@ public class DotMatrixDisplay
 			}
 		}
 	}	
+	
+	public int getDotIndex(int mouseX, int mouseY)
+	{
+		int index = -1;
+		
+		int c = (mouseX - _margin) / _dotDistance;
+		int r = (mouseY - _margin) / _dotDistance;		
+		
+		if (r < 0 || c <0 || r >= _dm.getRowCount() || c >= _dm.getColCount()) index = -1;
+		
+		index = _dm.getIndx(r, c);
+		
+		return index;		
+		
+	}
 }
