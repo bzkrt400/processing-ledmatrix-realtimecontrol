@@ -16,14 +16,14 @@ public class FlashDemo extends PApplet
 	
 	private ArrayList<Spark> alSparks;
 	
-	private int dotDistance = 22;
-	private int dotWidth = 20;
+	private int dotDistance = 18;
+	private int dotWidth = 16;
 	private int margin = 10;
 	
 	
 	public void setup() 
 	{
-		dmDemo = new DotMatrixDemo(this, 48, 7, "COM3");
+		dmDemo = new DotMatrixDemo(this, 72, 7, "COM3");
 		dmDemo.SetDisplayStyle(dotWidth, margin);
 		_dm = dmDemo.getDM();
 				
