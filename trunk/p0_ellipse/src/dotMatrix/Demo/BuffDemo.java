@@ -3,6 +3,7 @@ package dotMatrix.Demo;
 import processing.core.PApplet;
 import ddf.minim.*;
 import dotMatrix.TestHelper;
+import java.awt.Label;
 
 public class BuffDemo extends PApplet
 {
@@ -14,8 +15,9 @@ public class BuffDemo extends PApplet
 	
 	int halfWidth, halfHeight;
 	float sectionWidth;
-	
 	float buffMax, buffMin;
+	
+	Label lblNote = new Label("Hello");
 	
 	public void setup()
 	{
@@ -31,10 +33,12 @@ public class BuffDemo extends PApplet
 		ap.loop();		
 		
 		sectionWidth = (float)width / ap.bufferSize();		
+		
+		add(lblNote);
 	}
 	
 	public void draw()
-	{
+	{	
 		TestHelper.PrintText(this, Float.toString(buffMax));
 		TestHelper.PrintText(this, Float.toString(buffMin), 0xff, 2f, 48f);
 		
