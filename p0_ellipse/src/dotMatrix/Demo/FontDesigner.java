@@ -1,33 +1,71 @@
 package dotMatrix.Demo;
 
-import java.awt.TextField;
-import java.awt.TextArea;
+import dotMatrix.DotMatrix;
+import dotMatrix.DotMatrixDemo;
+import dotMatrix.DotMatrixDisplay;
+import dotMatrix.TestHelper;
 
 import processing.core.PApplet;
 
 public class FontDesigner extends PApplet
 {
-
 	private static final long serialVersionUID = 2480290622011449578L;
 
-	TextField inputLine = new TextField("inputLine", 15);
-	TextArea inputArea = new TextArea("inputArea", 5, 20);
+	private DotMatrix _dm;
+	private DotMatrixDemo dmDemo;
+	private DotMatrixDisplay _dmd;
+
+	private int dotWidth = 16;
+	private int margin = 10;
 
 	public void setup()
 	{
-		size(640, 480);
+		dmDemo = new DotMatrixDemo(this, 72, 7, "COM3");
+		dmDemo.SetDisplayStyle(dotWidth, margin);
+		_dm = dmDemo.getDM();
+		_dmd = dmDemo.getDotMatrixDisplay();
+		this.size(width, height + 20);
 
-		// setBounds(0,0,100,100);
-		add(inputLine);
-		add(inputArea);
+		dmDemo.display();
+	}
+
+	public void draw()
+	{
+
 	}
 
 	public void mousePressed()
 	{
-		String iLine = inputLine.getText();
-		String iArea = inputArea.getText();
-		println("inputLine: " + iLine);
-		println("inputArea: " + iArea);
+		if (mouseButton == LEFT)
+		{
+			int index = _dmd.getDotIndex(mouseX, mouseY);
+			if (index != -1)
+			{
+				_dm.reverseDot(index);
+			}
+		}
+
+		this.background(0x33);
+		
+		TestHelper.PrintText(this, calcPattern(), 0xff, 24f, 8f, height - 12f);
+		dmDemo.display();
+
+	}
+
+	private String calcPattern()
+	{
+		String s = new String();
+		for (int c = 0; c < 5; c++)
+		{
+			byte value = 0;
+			for (int i = 0; i < 7; i++)
+				if (_dm.getDot(i, c))
+					value |= (0x01 << i);
+
+			s = s.concat(hex(value)).concat(", ");
+		}
+		
+		return s;
 	}
 
 }

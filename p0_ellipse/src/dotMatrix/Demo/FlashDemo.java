@@ -9,9 +9,7 @@ import dotMatrix.Spark;
 import processing.core.PApplet;
 
 public class FlashDemo extends PApplet
-{	
-	
-	
+{		
 	private static final long serialVersionUID = -1596293397312990840L;
 	
 	private DotMatrix _dm;

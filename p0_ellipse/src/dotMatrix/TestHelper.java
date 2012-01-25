@@ -42,6 +42,18 @@ public class TestHelper
 		parent.text(s, x, y);		
 	}
 	
+	public static void PrintText(PApplet parent, String s, int fontColor, float fontSize, float x, float y)
+	{
+		if (_pf == null )
+			_pf = parent.loadFont("Calibri-24.vlw");
+		
+		_color = fontColor;
+		
+		parent.textFont(_pf, fontSize);
+		parent.fill(_color);
+		parent.text(s, x, y);		
+	}
+	
 	public static void fade(PApplet parent, int fadeValue)
 	{
 		parent.fill(0x00, fadeValue);
