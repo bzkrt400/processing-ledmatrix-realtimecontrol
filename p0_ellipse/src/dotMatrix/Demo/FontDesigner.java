@@ -15,12 +15,12 @@ public class FontDesigner extends PApplet
 	private DotMatrixDemo dmDemo;
 	private DotMatrixDisplay _dmd;
 
-	private int dotWidth = 16;
+	private int dotWidth = 12;
 	private int margin = 10;
 
 	public void setup()
 	{
-		dmDemo = new DotMatrixDemo(this, 72, 7, "COM3");
+		dmDemo = new DotMatrixDemo(this, 24*4, 7, "COM5");
 		dmDemo.SetDisplayStyle(dotWidth, margin);
 		_dm = dmDemo.getDM();
 		_dmd = dmDemo.getDotMatrixDisplay();
