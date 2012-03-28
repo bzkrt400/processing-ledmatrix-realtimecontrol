@@ -24,7 +24,7 @@ public class FlashDemo extends PApplet
 	
 	public void setup() 
 	{
-		dmDemo = new DotMatrixDemo(this, 72, 7, "COM3");
+		dmDemo = new DotMatrixDemo(this, 72, 7, "COM5");
 		dmDemo.SetDisplayStyle(dotWidth, margin);
 		_dm = dmDemo.getDM();
 		_dmd = dmDemo.getDotMatrixDisplay();
