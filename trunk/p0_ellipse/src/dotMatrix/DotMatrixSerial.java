@@ -16,7 +16,7 @@ public class DotMatrixSerial extends Serial
 	
 	public void send()
 	{
-		this.write(0xf3);
+		this.write(new byte[]{(byte)0xf3});
 		this.write(_dm.output());		
 	}
 }

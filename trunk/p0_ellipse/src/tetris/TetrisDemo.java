@@ -36,8 +36,10 @@ public class TetrisDemo extends PApplet
 	
 	public void setup()
 	{
-		dmDemo = new DotMatrixDemo(this, 24*3, 7, "COM5");
-		dmDemo.SetDisplayStyle(12, 10);
+
+		dmDemo = new DotMatrixDemo(this, 72, 7, "COM1");
+		dmDemo.SetDisplayStyle(16, 10);
+
 		_dm = dmDemo.getDM();
 		
 		df = new ArrayList<DotFont>();
